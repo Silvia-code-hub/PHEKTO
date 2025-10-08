@@ -1,0 +1,24 @@
+
+.shop-grid-whole{
+    background-color: #fff;
+}
+.shop-grid-container{
+    background-color: #F6F5FF;
+    height: 286px;
+    width: 100%;
+    align-items: center;
+    
+}
+.buttons{
+    display: flex;
+    align-items: center;
+    
+}
+.buttons :hover{
+    color: #FB2E86;
+    text-decoration: none;
+}
+h2{
+    color: #101750;
+    font-weight: 700;
+}

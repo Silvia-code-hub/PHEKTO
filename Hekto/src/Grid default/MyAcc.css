@@ -1,0 +1,84 @@
+.whole-page{
+    background-color: #fff;
+
+}
+.up-side{
+    background-color: #F6F5FF;
+    height: 285px;
+}
+.first-heading{
+    color: #101750;
+    font-weight: 700;
+    font-size: 36px;
+    align-items: center;
+}
+.down-side{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+}
+.down-content{
+    width: 433px;
+    height: 374px;
+    top: 581px;
+    border: 1px;
+}
+.login{
+    color: #000;
+    font-weight: 700;
+    font-size: 32px;
+    align-items: center;
+    text-align: center;
+    margin-left: 130px;
+
+
+}
+.login-heading{
+    width: 299px;
+    height: 20px;
+    top: 620px;
+    font-weight: 400;
+    font-size: 17px;
+    margin-top: -25px;
+}
+.input-box{
+    text-align: left;
+    border: none;
+    gap: 10px;
+}
+.email{
+    background-color: #FFFFFF;
+    border: 1px;
+    border-radius: 2px;
+    width: 432px;
+    height: 52px;
+    margin-bottom: 10px;
+
+}
+.password{
+    background-color: #FFFFFF;
+    border: 1px;
+    border-radius: 2px;
+    width: 432px;
+    height: 52px;
+    margin-bottom: 10px;
+}
+.forgot-password{
+    margin-top: 40px;
+    color: #9096B2;
+    font-weight: 400;
+    font-size: 16px;
+    text-align: left;
+}
+.signin-btn{
+    background-color: #FB2E86;
+    width: 432px;
+    height: 47px;
+    color: white;
+
+}
+.adt-image{
+    margin-top: 180px;
+}

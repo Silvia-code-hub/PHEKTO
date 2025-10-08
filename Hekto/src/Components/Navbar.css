@@ -1,0 +1,66 @@
+.navbar{
+    display: flex;
+    border: none;
+    width: 100%;
+    align-items: center;
+    background: #fff;
+    color: black;
+   z-index: 999;
+    position: sticky;
+    top: 5%;
+}
+div button{
+    border: none;
+    background: none;
+}
+div button:hover{
+    color: rgb(158, 3, 91);
+}
+
+
+
+.h1{
+   color: black;
+    font-weight:bold ;
+    font-size: medium;
+
+}
+.nav-container{
+    display: flex;
+    align-items: center;
+    margin-left:10rem;
+    gap: 1rem;
+    border: none;
+    color: black;
+
+
+}
+.nav-container button{
+    color: black;
+
+}
+
+form input{
+    
+    height: 1rem;
+    
+    
+    
+}
+form button{
+    background: rgb(233, 20, 123);
+    color: white;
+    border: none;
+    padding: 0.5rem;
+    
+}
+.nav-container form{
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+.nav-container form input{
+    height: 1.5rem;
+    padding: 0.25rem 0.5rem;
+    
+}

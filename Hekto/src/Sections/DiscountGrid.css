@@ -1,0 +1,9 @@
+.disc-grid-container{
+    background-color: #fff;
+}
+.disc-subtitle{
+    color:  rgb(0, 52, 164); 
+    font-size: large;
+    font-weight: 600;
+    text-align: center;
+}

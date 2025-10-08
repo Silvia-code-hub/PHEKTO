@@ -1,0 +1,114 @@
+.bigpage{
+    background-color: #fff;
+}
+.upper{
+    background-color: #F6F5FF;
+    height: 286px;
+
+}
+.upper-heading{
+    color: #101750 ;
+    font-weight: 700;
+    font-size: 36px;
+}
+.first{
+    display: flex;
+    width: 1191px;
+    height: 490px;
+}
+.first-info{
+
+
+}
+.title-info{
+    width: 522px;
+    height: 44px;
+    color: #151875;
+    font-weight: 700;
+    font-size: 36px;
+
+}
+.sub-info{
+    width: 550px;
+    height: 49px;
+    color: #8A8FB9;
+    margin-top: 10px;
+}
+.color-dots{
+    color: "#5625DF","#FF27B7","#37DAF3";
+}
+.first-info-next{
+    margin-top: 60px;
+
+}
+.info-next{
+    width: 522px;
+    height: 44px;
+    color: #151875;
+    font-weight: 700;
+    font-size: 36px;
+
+}
+.info-sub{
+     width: 550px;
+    height: 49px;
+    color: #8A8FB9;
+    margin-top: 10px;
+
+}
+.input-part{
+    width: 534px;
+    height: 337px;
+
+}
+.input-part-a{
+    display: flex;
+    border: 1px;
+    border-color: #8A8FB9;
+}
+.name{
+    width: 255px;
+    height: 45px;
+    border: 1px;
+    border-color: #A4B6C8B2;
+    margin-left: -24px;
+}
+.email{
+     width: 255px;
+    height: 45px;
+    border: 1px;
+    border-color: #A4B6C8B2;
+}
+.subject{
+     width: 534px;
+    height: 45px;
+    border: 1px;
+    border-color: #A4B6C8B2;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    text-align: left;
+    margin-left: 15px;
+    padding-right: 70px;
+}
+.message{
+     width: 534px;
+    height: 166px;
+    border: 1px;
+    border-color: #A4B6C8B2;
+    margin-top: 20px;
+    text-align: left;
+    margin-left: 15px;
+    
+}
+.send-btn{
+    width: 157px;
+    height: 44px;
+    border-radius: 3px;
+    background-color:#FB2E86 ;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 16px;
+    margin-top: -30px;
+    margin-left: 15px;
+}

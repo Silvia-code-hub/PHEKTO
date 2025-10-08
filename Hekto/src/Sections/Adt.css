@@ -1,0 +1,12 @@
+.adt-container{
+    background: #fff;
+}
+.adt-image{
+   
+    width: 904px;
+    height: 93px;
+    display: flex;
+    align-items: center;
+   
+}
+/*the image is not positioned right*/

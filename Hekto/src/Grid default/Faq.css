@@ -1,0 +1,85 @@
+.faq-page{
+    background-color:#fff;
+
+}
+.faq-top{
+    height: 286px;
+    background-color: #F6F5FF;
+}
+.faq-head-title{
+    height: 36px;
+    width: 75px;
+    font-size: 36px;
+    font-weight: 700;
+    color: #000;
+}
+.faq-bottom{
+    display: flex;
+
+}
+.faq-title{
+    font-weight: 700;
+    font-size: 36px;
+    width: 348px;
+    height: 30px;
+    color: #1D3178;
+
+}
+.faq-sub-title{
+    font-weight: 700;
+    font-size: 17px;
+    width: 395px;
+    height: 30px;
+    color: #1D3178;
+}
+.description{
+    font-weight: 400;
+    font-size: 16px;
+    width: 499px;
+    height: 45px;
+    color: #A1ABCC;
+}
+.faq-bottom-right{
+    width: 566px;
+    height: 738px;
+    background-color: #CDCEDC;
+    border: 1px;
+    margin-left: 20px;
+}
+.faq-title-right{
+    font-weight: 700;
+    font-size: 24px;
+    width: 175px;
+    height: 30px;
+    color: #1D3178;
+    margin-left: 20px;
+}
+.input-part{
+    gap: 20px;
+
+}
+.name{
+    width: 445px;
+    height: 50px;
+    border: 1px;
+    background-color: #CDCEDC;
+
+}
+.email{
+    width: 445px;
+    height: 50px;
+    border: 1px;
+    background-color: #CDCEDC;
+    
+}
+.message{
+    width: 445px;
+    height: 197px;
+    border: 1px;
+    background-color: #CDCEDC;
+    margin-left: -50px;
+}
+.send-btn{
+    margin-top: 50px;
+
+}

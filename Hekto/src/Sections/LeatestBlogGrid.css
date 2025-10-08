@@ -1,0 +1,12 @@
+.blog-grid-container{
+    background-color: #fff;
+}
+.blog-title{
+    display: flex;
+    color: rgb(38, 38, 125);
+    justify-content: center;
+}
+.blog-grid{
+    display: flex;
+    justify-content: space-evenly;
+}

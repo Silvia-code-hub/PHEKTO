@@ -1,0 +1,9 @@
+.top-grid-container{
+    background-color: #fff;
+    
+   height:500px;
+}
+.top-grid{
+    display: flex;
+    justify-content: space-evenly;
+}

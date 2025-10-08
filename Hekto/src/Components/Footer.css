@@ -1,0 +1,36 @@
+.main-container{
+    
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+}
+.mainn{
+    display: flex;
+    background-color:#EEEFFB ;
+    height: 459px;
+    justify-content: space-evenly;
+    
+}
+.submit{
+    background-color: rgb(181, 41, 86);
+    color: #fff;
+}
+.min{
+    background-color: #E7E4F8;
+    height: 53px;
+    display: flex;
+    justify-content: space-evenly;
+}
+h2{
+    color: black;
+}
+form{
+    display: flex;
+}
+input{
+    background: #fff;
+    height: 50px;
+}
+input id{
+    color: gray;
+}

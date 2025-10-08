@@ -1,0 +1,19 @@
+.trend-grid-container{
+    background-color: white;
+    
+    
+}
+.trend-subtitle{
+    color: rgb(8, 54, 145);
+    text-align: center;
+    font-weight: 600;
+    
+    
+}
+.trend-grid {
+            display: flex;
+            
+            justify-content: space-evenly;
+            gap: 25px;
+        }
+        

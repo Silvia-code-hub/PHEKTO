@@ -1,0 +1,70 @@
+.shopex-container{
+    background-color: #fff;
+    
+    text-align: center;
+}
+.shopex-subtitle {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #042048;
+   text-align: center;
+}
+.shopex-grid {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.shopex-card {
+    flex: 1;
+    min-width: 250px;
+    max-width: 300px;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+.shopex-image {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.shopex-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.shopex-card-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+    color: #333;
+}
+.shopex-card-description {
+    color: #666;
+    line-height: 1.5;
+}
+@media (max-width: 1200px) {
+    .shopex-card {
+        min-width: 220px;
+    }
+}
+
+@media (max-width: 768px) {
+    .shopex-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .shopex-card {
+        min-width: 100%;
+        max-width: 400px;
+    }
+}

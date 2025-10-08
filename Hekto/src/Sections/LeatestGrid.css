@@ -1,0 +1,25 @@
+.least-grid-container{
+    background-color: white;
+    max-height: 100%;
+}
+.page-subtitle{
+     text-align: center;
+     color: rgb(38, 38, 125);
+     font-size: large;
+     font-weight: 500;
+}
+.page-button{
+
+    display: flex;
+    flex-direction: row;
+    opacity: 1;
+    justify-content: center;
+}
+div button{
+    color: rgb(27, 27, 116);
+    justify-content: center;
+}
+div button:hover{
+    color: brown;
+    text-decoration: underline;
+}
