@@ -1,5 +1,7 @@
 import Layout from "../Components/layout";
 import "./OrderComplete.css"
+import { FaRegClock } from "react-icons/fa";
+import { FaClipboardList } from "react-icons/fa";
 
 const OrderComplete:React.FC = () => {
     return(
@@ -17,8 +19,8 @@ const OrderComplete:React.FC = () => {
                 </div>
             </div>
             <div className="centre">
-                <div className="first -icon">
-                    <img src="" alt="" />
+                <div className="first-icon">
+                    <FaRegClock/>
                 </div>
                 <div className="sec-centre">
                     <h2 className="sec-title">Your Order Is Completed! </h2>
@@ -27,6 +29,7 @@ const OrderComplete:React.FC = () => {
                           <button className="continue-btn">Continue Shopping</button>
                 </div>
                 <div className="third-icon">
+                    <FaClipboardList/>
 
                 </div>
             </div>

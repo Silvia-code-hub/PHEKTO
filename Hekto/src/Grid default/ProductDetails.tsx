@@ -1,24 +1,26 @@
 import React from "react";
 import { FaRegHeart, FaFacebook,FaInstagramSquare, FaTwitterSquare, FaArrowRight } from 'react-icons/fa';
 
+import type { Relates } from "./ProductDetailsItems";
 import Layout from "../Components/layout";
 import "./ProductDetails.css"
 interface ProductDetailsProps{
     relates: Relates;
 }
 
-interface Relates {
-    image: string;
-    name: string;
-    rating: number;
-    price: number;
-}
+
 
 
 
 
 const ProductDetails: React.FC<ProductDetailsProps> = ({ relates }) => {
-    const { image, name, rating } = relates;
+    const { image, name, rating, price } = relates;
+
+    console.log('ProductDetails - relates data:', relates);
+    console.log(' Image:', image);
+    console.log(' Name:', name);
+    console.log(' Rating:', rating);
+    console.log(' Price:', price);
 
     return(
         <Layout>
@@ -74,7 +76,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ relates }) => {
 
             </div>
                <div className="part-3">
-                 <div className="buttons">
+                 <div className="part-3-buttons">
                      <div><button className="nav-link">Description</button></div>
                      <div><button className="nav-link">Additional info</button></div>
                      <div><button className="nav-link">Reviews</button></div> 
@@ -93,12 +95,14 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ relates }) => {
                <div className="part-4">
                 <h3 className="related-product">Related Products</h3>
                 <div className="related-images">
-                    <img src={image} alt={name}
+                    <div key={relates.id}>
+                    <img src={relates.image} alt={relates.name}
                      />
+                     </div>
                 </div>
                 <div className="images-info">
                     <div className="name-rate">
-                        <h3 className="image-name">{name}</h3>
+                        <h3 className="image-name">{relates.name}</h3>
                         <div className="product-rating">
                             {Array(5)
                            .fill(null)
@@ -109,7 +113,8 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ relates }) => {
                           ))}
                         </div>
                     </div>
-                    <div className="price">$price   
+                    <div className="price">${price}
+                           
                     </div>
                 </div>
 

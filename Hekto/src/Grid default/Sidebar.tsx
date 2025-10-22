@@ -9,12 +9,13 @@ interface SidebarItemProps {
 }
 
 const SideBarr: React.FC<FilterOptions> =({filters, onFilterChange}) =>{
-    const [filterData] = useState<FilterData>({
+  const [filterData] = useState<FilterData>({
+
   brands: [
     "Coaster Furniture",
     "Fusion Dot High Fashion",
-    "Unique Furnitture Restor",
-    "Dream Furnitture Flipping",
+    "Unique Furniture Restor",
+    "Dream Furniture Flipping",
     "Young Repurposed",
     "Green DIY furniture"
   ],
@@ -35,9 +36,9 @@ const SideBarr: React.FC<FilterOptions> =({filters, onFilterChange}) =>{
 ],
 priceRange:[
 {id:1,label:"$0.00 - $150.00",min:0.00,max:150.00},
-{id:1,label:"$150.00 - $350.00",min:150.00,max:300.00},
-{id:1,label:"$350.00 - $450.00",min:350.00,max:450.00},
-{id:1,label:"$450.00 +",min:450.00,max:1000.00},
+{id:2,label:"$150.00 - $350.00",min:150.00,max:300.00},
+{id:3,label:"$350.00 - $450.00",min:350.00,max:450.00},
+{id:4,label:"$450.00 +",min:450.00,max:1000.00},
 ],
 colors:[
   {id:1, name: "Blue", value: "#5E37FF"},
@@ -71,6 +72,13 @@ colors:[
     onFilterChange("categories", `rating-${rating}`);
   };
 
+console.log('SideBarr component rendering');
+console.log('Filters prop:', filters);
+console.log('filterData:',filterData);
+console.log('Brands count:',filterData.brands.length);
+console.log(' Discounts count:', filterData.discountOffers.length);
+console.log(' Expanded sections:', expandedSections);
+
 
  
 
@@ -78,8 +86,8 @@ colors:[
 return(
     <div className="side-bar-info">
         <div className="brands-section" onClick={() =>toggleSection("brands")}>
-            <h3>Product Brand</h3>
-             <span className="toggle-icon">{expandedSections.brands ? "−" : "+"}</span>
+            <h3 className="side-heading">Product Brand</h3>
+             
          </div>
         {expandedSections.brands && (
           <div className="section-content">
@@ -97,7 +105,7 @@ return(
           </div>
         )}
          <div className="discount-section" onClick={() => toggleSection("discounts")}>
-          <h3>Discount Offer</h3>
+          <h3 className="side-heading">Discount Offer</h3>
           <span className="toggle-icon">{expandedSections.discounts ? "−" : "+"}</span>
         </div>
         {expandedSections.discounts && (
@@ -116,7 +124,7 @@ return(
           </div>
         )}
         <div className="Rating-section" onClick={() => toggleSection("ratings")}>
-          <h3>Rating Item</h3>
+          <h3 className="side-heading">Rating Item</h3>
           <span className="toggle-icon">{expandedSections.ratings ? "−" : "+"}</span>
         </div>
         {expandedSections.ratings && (
@@ -125,18 +133,18 @@ return(
               <div key={rating} className="rating-item" onClick={() => handleRatingFilter(rating)}>
                 <div className="stars">
                   {Array(5).fill(0).map((_, i) => (
-                    <span key={i} className={i < rating ? "star filled" : "star"}>
+                    <span key={i} className={i < rating ? "star-filled" : "star"}>
                       ★
                     </span>
                   ))}
                 </div>
-                <span className="rating-text">& up</span>
+                <span className="rating-text"></span>
               </div>
             ))}
           </div>
         )}
         <div className="categories-section" onClick={() => toggleSection("categories")}>
-          <h3>Categories</h3>
+          <h3 className="side-heading">Categories</h3>
           <span className="toggle-icon">{expandedSections.categories ? "−" : "+"}</span>
         </div>
         {expandedSections.categories && (
@@ -155,7 +163,7 @@ return(
           </div>
         )}
         <div className="price-section" onClick={() => toggleSection("price")}>
-          <h3>Price Range</h3>
+          <h3 className="side-heading">Price Range</h3>
           <span className="toggle-icon">{expandedSections.price ? "−" : "+"}</span>
         </div>
         {expandedSections.price && (
@@ -174,7 +182,7 @@ return(
           </div>
         )}
         <div className="colors-section" onClick={() => toggleSection("colors")}>
-          <h3>Filter by Color</h3>
+          <h3 className="side-heading">Filter by Color</h3>
           <span className="toggle-icon">{expandedSections.colors ? "−" : "+"}</span>
         </div>
         {expandedSections.colors && (
@@ -229,7 +237,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({item}) =>{
                           <span className="new-price">${price.toFixed(2)}</span>
                           <span className="old-price">${oldPrice.toFixed(2)}</span>
                         </div>
-                        <div className="product-rating">
+                        <div className="sidebar-product-rating">
         
                             {Array(5)
                            .fill(null)
@@ -242,7 +250,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({item}) =>{
                         <div className="p-3">
                         <p className="description">{description}</p>
                         </div>
-                        <div className="icons">
+                        <div className="sidebar-icons">
                                   <FaShoppingCart/>
                                   <FaRegHeart/>
                                   <FaSearchPlus/>
@@ -255,7 +263,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({item}) =>{
 
     )
 };
-//main component
+
 const Sidee: React.FC = () =>{
 
   const [filters, setFilters] = useState({
@@ -266,6 +274,16 @@ const Sidee: React.FC = () =>{
     priceRange: [],
     colors: []
   });
+   if (!Type || !Array.isArray(Type)) {
+    console.error('Type data is not available or not an array');
+    return (
+      <Layout>
+        <div className="Big-container">
+          <div>Error: Product data not available</div>
+        </div>
+      </Layout>
+    );
+  }
 
   const handleFilterChange = (filterType: string, value: string) => {
     setFilters(prev => {
@@ -283,15 +301,17 @@ const Sidee: React.FC = () =>{
       }
     });
   };
+  console.log('Sidee component rendering');
+  console.log('Type data:', Type);
     return(
         <Layout>
          <div className="Big-container">
             <div className="first-part">
-                <h2 className="first-heading"> Shop List</h2>
+                <h2 className="first-heading"> Shop Left Sidebar</h2>
                 <div className="buttons">
                   <div><button className="nav-link">Home</button></div>
                   <ul><li><div><button className="nave-link">Pages</button></div></li></ul>
-                  <ul><li><div><button className="nave-link">Shop List</button></div></li></ul> 
+                  <ul><li><div><button className="nave-link">Shop Left Sidebar</button></div></li></ul> 
 
                 </div>
             </div>

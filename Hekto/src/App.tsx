@@ -16,10 +16,10 @@ import Adt from "./Sections/Adt";
 import BlogGrid from "./Sections/LeatestBlogGrid";
 import Footer from "./Components/Footer";
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import EcomGrid from "./Grid default/EcomGrid";
+import Default from "./Grid default/Default";
+import { products } from "./Grid default/Defaultitems";
 import ShopList from "./Grid default/ShopList";
 import Sidee from "./Grid default/Sidebar";
-import type { FilterOptions } from "./Grid default/SidebarItems";
 import ProductDetails from "./Grid default/ProductDetails";
 import ShoppingCart from "./Grid default/ShoppingCart";
 import OrderComplete from "./Grid default/OrderComplete";
@@ -81,13 +81,14 @@ function App() {
       </nav>
       <Routes>
        
-        <Route path="/grid" element={<EcomGrid  />} />
+        <Route path="/grid" element={<Default products={products}  />} />
         <Route path="/shop-list" element={<ShopList /> } />
         <Route path="/side-bar" element={<Sidee />} />
         <Route path="/product-details" element={<ProductDetails relates={{
+          id: 0,
           image: "",
           name: "",
-          rating: 0,
+          rating: 0 ,
           price: 0
         }} />} />
         <Route path="/shopping-cart" element={<ShoppingCart /> } />

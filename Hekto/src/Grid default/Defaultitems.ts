@@ -1,25 +1,28 @@
-
-import"./EcomGrid.css"
-import { Types, type Product } from "./EcomItems";
-import Default from "./Default";
-
-const EcomGrid: React.FC = () => {
-const sampleProduct: Product[] = [
+export interface Product {
+  id: number;
+  name: string;
+  image: string;
+  colors:string[];
+  price: number;
+  oldPrice: number; 
+  
+}
+export const products:Product[] =[
     {
         id: 1,
-        image: "src/assets/images/image_019.png",
+        image: "/src/assets/images/image_019.png",
         name: "Vel elit euismod",
         price: 26.00,
         oldPrice: 42.00,
-        colors: ["#DE9034,#EC42A2,#8568FF"]
+        colors: ["#DE9034","#EC42A2","#8568FF"]
     },
     {
         id: 2,
-        image: "src/assets/images/image_020.png",
+        image: "/src/assets/images/image_020.png",
         name: "Ultricies condimentum imperdiet",
         price: 26.00,
         oldPrice: 42.00,
-        colors: ["#DE9034,#EC42A2,#8568FF"]
+        colors: ["#DE9034","#EC42A2","#8568FF"]
     },
     {
         id: 3,
@@ -27,7 +30,7 @@ const sampleProduct: Product[] = [
         name: "Vitae suspendisse sed",
         price: 26.00,
         oldPrice: 42.00,
-        colors: ["#DE9034,#EC42A2,#8568FF"]
+        colors: ["#DE9034","#EC42A2","#8568FF"]
     },
     {
         id: 4,
@@ -35,7 +38,7 @@ const sampleProduct: Product[] = [
         name: "Sed at fermentum",
         price: 26.00,
         oldPrice: 42.00,
-        colors: ["#DE9034,#EC42A2,#8568FF"]
+        colors: ["#DE9034","#EC42A2","#8568FF"]
     },
     {
         id: 5,
@@ -43,7 +46,7 @@ const sampleProduct: Product[] = [
         name: "Fusce pellentesque at",
         price: 26.00,
         oldPrice: 42.00,
-        colors: ["#DE9034,#EC42A2,#8568FF"]
+        colors: ["#DE9034","#EC42A2","#8568FF"]
     },
     {
         id: 6,
@@ -51,7 +54,7 @@ const sampleProduct: Product[] = [
         name: "Vestibulum magna laoreet",
         price: 26.00,
         oldPrice: 42.00,
-        colors: ["#DE9034,#EC42A2,#8568FF"]
+        colors: ["#DE9034","#EC42A2","#8568FF"]
     },
     {
         id: 7,
@@ -59,7 +62,7 @@ const sampleProduct: Product[] = [
         name: "Sollicitudin amet orci",
         price: 26.00,
         oldPrice: 42.00,
-        colors: ["#DE9034,#EC42A2,#8568FF"]
+        colors: ["#DE9034","#EC42A2","#8568FF"]
     },
     {
         id: 8,
@@ -67,7 +70,7 @@ const sampleProduct: Product[] = [
         name: "Ultrices mauris sit",
         price: 26.00,
         oldPrice: 42.00,
-        colors: ["#DE9034,#EC42A2,#8568FF"]
+        colors: ["#DE9034","#EC42A2","#8568FF"]
     },
     {
         id: 9,
@@ -75,7 +78,7 @@ const sampleProduct: Product[] = [
         name: "Pellentesque condimentum ac",
         price: 26.00,
         oldPrice: 42.00,
-        colors: ["#DE9034,#EC42A2,#8568FF"]
+        colors: ["#DE9034","#EC42A2","#8568FF"]
     },
     {
         id: 10,
@@ -83,7 +86,7 @@ const sampleProduct: Product[] = [
         name: "Cras scelerisque velit",
         price: 26.00,
         oldPrice: 42.00,
-        colors: ["#DE9034,#EC42A2,#8568FF"]
+        colors: ["#DE9034","#EC42A2","#8568FF"]
     },
     {
         id: 11,
@@ -91,7 +94,7 @@ const sampleProduct: Product[] = [
         name: "Lectus vulputate faucibus",
         price: 26.00,
         oldPrice: 42.00,
-        colors: ["#DE9034,#EC42A2,#8568FF"]
+        colors: ["#DE9034","#EC42A2","#8568FF"]
     },
     {
         id: 12,
@@ -99,24 +102,6 @@ const sampleProduct: Product[] = [
         name: "Purus risus, ut",
         price: 26.00,
         oldPrice: 42.00,
-        colors: ["#DE9034,#EC42A2,#8568FF"]
+        colors: ["#DE9034","#EC42A2","#8568FF"]
     },
-];
-    return(
-        <div className="grid-container">
-            <div className="sample">
-                {sampleProduct.map(product => (
-                    <Default key={product.id} Types={product} />
-                ))}
-            </div>
-            {/* If you want to keep the product-grid section, make sure Types is an array of Product */}
-            {/* <div className="product-grid">
-                {Types.map(product => (
-                    <Default key={product.name} Types={product} />
-                ))}
-            </div> */}
-        </div>
-
-    )
-}
-export default EcomGrid;
+]
