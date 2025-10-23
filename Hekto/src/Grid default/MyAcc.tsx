@@ -20,13 +20,15 @@ const MyAcc: React.FC = () => {
                     <p className="login-heading">Please login using account detail below.</p>
                     <div className="input-box">
                         <div className="email">
-                            <label htmlFor="email">Email Address*</label><br />
-                            <input type="email" name="email" id="email" placeholder=" Email Address" />
+                           <form action="input-box">
+                            <input type="text box" name="email" id="email" placeholder=" Email Address" />
+                            </form>
                         </div>
                         <div className="password">
-                            <label htmlFor="password">Password*</label><br />
+                            
                             <input type="password" name="password" id="password" placeholder=" Password" />
                         </div>
+                        
 
                     </div>
                     <p className="forgot-password">Forgot your password?</p>

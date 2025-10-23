@@ -64,3 +64,44 @@ form button{
     padding: 0.25rem 0.5rem;
     
 }
+.dropdown-container{
+    position: relative;
+    display: inline-block;
+
+}
+.dropdown-trigger{
+    display: flex;
+    align-items: center;
+    gap: 3px ;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.dropdown-menu{
+    position: absolute;
+    background-color: #fff;
+    color: #000;
+    animation: dropdownFadeIn 0.2s ease-in-out;
+}
+.dropdown-list {
+  list-style: none;
+  margin: 0;
+  padding: 8px 0;
+}
+.dropdown-link{
+    display: block;
+    color: #333;
+    padding: 2px;
+    transition: all 0.2s ease;
+    border: none;
+    width: 100%;
+    text-align: left;
+    font-size: 12px;
+    cursor: pointer;
+
+
+}
+.dropdown-link:hover {
+  background-color: #f8f9fa;
+  color: #007bff;
+}
+
