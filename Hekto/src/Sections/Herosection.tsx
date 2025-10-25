@@ -3,20 +3,20 @@ import  './Herosection.css';
 
 const HeroSection = () => {
   return(
-    <div className="hero-container">
-      <div className="banner-image left">
-        <img src="/src/assets/images/image_32.png" alt="" />
+    <div className="herosection-container">
+      <div className="promotional-image left">
+        <img src="/src/assets/images/image_32.png"  />
       </div>
 
       <div className='hero-content'>
-        <h3 className="subtitle">Best Furniture For Your Castle....</h3>
-        <h1 className="title">New Furniture Collection Trends in 2020</h1>
-        <h2 className="Subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.</h2>
-        <button>
-          <input type="button" value="Shop Now" />
+        <h3 className="hero-subtitle">Best Furniture For Your Castle....</h3>
+        <h1 className="hero-title">New Furniture Collection Trends in 2020</h1>
+        <h2 className="hero-Subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.</h2>
+        <button className='hero-btn'> Shop Now
+          
           </button>
       </div>
-      <div className='banner-image right'>
+      <div className='promotional-image right'>
         <img src="/src/assets/images/sofa promotional header.png" alt="" />
       </div>
       

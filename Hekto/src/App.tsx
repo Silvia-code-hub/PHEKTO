@@ -61,7 +61,7 @@ function App() {
       </div>
       <Router>
       <nav>
-        <Link to="/">Sections</Link> |
+        <Link to="/">Home Page</Link> |
          <Link to="/grid">Grid default</Link>|
          <Link to="/shop-list">Shop List</Link>|
          <Link to="/side-bar">Sidebar</Link> | 
@@ -80,7 +80,7 @@ function App() {
           
       </nav>
       <Routes>
-       
+       <Route path="/" element={<div>Home Page</div>}/>
         <Route path="/grid" element={<Default products={products}  />} />
         <Route path="/shop-list" element={<ShopList /> } />
         <Route path="/side-bar" element={<Sidee />} />

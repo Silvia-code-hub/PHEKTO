@@ -1,12 +1,12 @@
-import { useState, type Key, type FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState,  type FormEvent } from 'react';
+
 import './Navbar.css'
 import { FaSearch, FaChevronUp, FaChevronDown } from 'react-icons/fa';
 
 
 
 const Navigation = () => {
-  const navigate = useNavigate();
+
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
 
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -24,6 +24,7 @@ const Navigation = () => {
   const closeDropdown = () => {
     setIsDropdownOpen(false);
   };
+  console.log('Navigation component is rendering');
   const menuItems = [
         { id: 1, label: 'grid-default', path: '/grid' },
         { id: 2, label: 'shop-list', path: '/shop-list' },  
@@ -41,6 +42,7 @@ const Navigation = () => {
         { id: 14, label: 'faq', path: '/faq' },
 
   ];
+  
 
     return (
       <nav className='navbar'>
@@ -69,7 +71,7 @@ const Navigation = () => {
                         className='dropdown-link'
                         onClick={(e) => {
                           e.preventDefault();
-                         navigate(item.path)
+                         
                           closeDropdown();
                         }}
                       >
