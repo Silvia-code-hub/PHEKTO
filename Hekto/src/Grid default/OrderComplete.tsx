@@ -5,9 +5,10 @@ import { FaClipboardList } from "react-icons/fa";
 
 const OrderComplete:React.FC = () => {
     return(
-        <Layout>
+        
 
          <div className="order-complete">
+            <Layout>
 
             <div className="order-head">
                 <h2 className="first-heading"> Order Completed</h2>
@@ -36,8 +37,9 @@ const OrderComplete:React.FC = () => {
             <div className="adt-image">
             <img src="src/assets/images/image_015.png" alt="" />
           </div>
+           </Layout>
         </div>
-        </Layout>
+       
     );
 };
 export default OrderComplete;

@@ -3,8 +3,9 @@ import "./MyAcc.css"
 
 const MyAcc: React.FC = () => {
     return(
-        <Layout>
+       
             <div className="whole-page">
+                 <Layout>
                 <div className="up-side">
                     <h2 className="first-heading"> My Account</h2>
                     <div className="buttons">
@@ -45,8 +46,9 @@ const MyAcc: React.FC = () => {
             <div className="adt-image">
                <img src="src/assets/images/image_015.png" alt="" />
           </div>
+          </Layout>
             </div>
-        </Layout>
+        
 
     );
 };

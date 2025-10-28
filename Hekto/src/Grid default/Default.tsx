@@ -10,8 +10,9 @@ interface EcomProps{
 const Default:React.FC<EcomProps> =({ products  }) =>{
     console.log('product data:',products);
     return(
-        <Layout>
+        
             <div className="shop-grid-whole">
+              <Layout>
                 <div className="shop-grid-container">
                  <h2 className="f-heading"> Shop Grid Default</h2>
                 <div className="buttons">
@@ -68,9 +69,10 @@ const Default:React.FC<EcomProps> =({ products  }) =>{
            
 
             </div>
+            </Layout>
         
         </div>
-        </Layout>
+        
     )
 }
 export default Default;

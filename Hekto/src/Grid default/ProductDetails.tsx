@@ -23,8 +23,9 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ relates }) => {
     console.log(' Price:', price);
 
     return(
-        <Layout>
+        
         <div className="main-layer">
+            <Layout>
             <div className="part-1">
                 <h2 className="product-title">Product Details</h2>
                 <div className="buttons">
@@ -119,8 +120,9 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ relates }) => {
                 </div>
 
                </div>
+               </Layout>
         </div>
-        </Layout>
+        
     )
     
 }

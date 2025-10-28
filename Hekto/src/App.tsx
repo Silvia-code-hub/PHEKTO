@@ -1,20 +1,7 @@
-import Header from "./Components/Header";
-import Navbar from './Components/Navbar';
+
 import './App.css'
-import Herosection from "./Sections/Herosection";
-import ProductGrid from "./Sections/ProductGrid";
-import LeastGrid from "./Sections/LeatestGrid";
-import ShopexCard from "./Sections/ShopexCard";
-import LandT from "./Sections/LandT";
-import TrendGrid from "./Sections/TrendingGrid";
-import TrendBox from "./Sections/TrendBox";
-import Feature from "./Sections/Discount";
-import DiscGrid from "./Sections/DiscountGrid";
-import TopGrid from "./Sections/TopGrid";
-import Banner from "./Sections/Banner";
-import Adt from "./Sections/Adt";
-import BlogGrid from "./Sections/LeatestBlogGrid";
-import Footer from "./Components/Footer";
+import HomePage from "./Components/HomePage";
+
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Default from "./Grid default/Default";
 import { products } from "./Grid default/Defaultitems";
@@ -41,22 +28,8 @@ function App() {
   return (
     <>
       <div>
-     <Header/>
-     <Navbar/>
-     <Herosection/>
-     <ProductGrid/>
-     <LeastGrid/>
-     <ShopexCard/>
-     <LandT/>
-     <TrendGrid/>
-     <TrendBox/>
-     <Feature/>
-     <DiscGrid/>
-     <TopGrid/>
-     <Banner/>
-     <Adt/>
-     <BlogGrid/>
-     <Footer/>
+     
+     <HomePage/>
      
       </div>
       <Router>

@@ -53,6 +53,12 @@
     display:flex;
     justify-content: flex-start;
     flex-direction: column;
+    background-color: #fff;
+    
+}
+.product-info:hover{
+  background-color: #2F1AC4;
+
 }
 .product-name {
   font-size: 1.3rem;

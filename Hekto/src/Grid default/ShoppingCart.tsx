@@ -42,9 +42,10 @@ const ShoppingCart:React.FC = () => {
     return price * quantity;
   };
    return (
-    <Layout>
+   
      
     <div className="shopping-cart">
+       <Layout>
 
       <div className="up-part">
          <h2 className="first-heading"> Shopping Cart</h2>
@@ -104,8 +105,9 @@ const ShoppingCart:React.FC = () => {
           </div>
         </>
       )}
+      </Layout>
     </div>
-    </Layout>
+    
   );
 };
 export default ShoppingCart;

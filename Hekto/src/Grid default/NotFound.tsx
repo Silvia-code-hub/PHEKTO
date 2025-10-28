@@ -3,9 +3,10 @@ import "./AboutUs.css"
 
 const NotFound = () => {
     return(
-        <Layout>
+     
 
             <div className="not-found-page">
+                <Layout>
 
                   <div className="top">
                         <h2 className="header-top">404  Page Not Found</h2>
@@ -33,10 +34,10 @@ const NotFound = () => {
                                    </div>
                                   
                     </div>
-             
+             </Layout>
                   
             </div>
-        </Layout>
+        
     )
 }
 export default NotFound;

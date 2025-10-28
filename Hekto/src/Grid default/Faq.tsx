@@ -4,9 +4,10 @@ import"./Faq.css"
 
 const Faq: React.FC = () => {
     return(
-        <Layout>
+       
 
             <div className="faq-page">
+                 <Layout>
                  <div className="faq-top">
                       <h2 className="faq-head-title">FAQ</h2>
                          <div className="buttons">
@@ -57,9 +58,9 @@ const Faq: React.FC = () => {
                                        <img src="src/assets/images/image_015.png" alt="" />
                       </div>
                          
-                 
+                 </Layout>
             </div>
-        </Layout>
+        
     )
 }
 export default Faq;

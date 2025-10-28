@@ -172,8 +172,8 @@ return(
               <label key={range.id} className="checkbox-item">
                 <input
                   type="checkbox"
-                  checked={filters.priceRange.includes(range.id)}
-                  onChange={() => onFilterChange("priceRange", String(range.id))}
+                  checked={filters.priceRange.min === range.min && filters.priceRange.max === range.max}
+                  onChange={() => onFilterChange("priceRange", JSON.stringify({ min: range.min, max: range.max }))}
                 />
                 <span className="checkmark"></span>
                 {range.label}
@@ -271,7 +271,7 @@ const Sidee: React.FC = () =>{
     discountOffers: [],
     ratings: [],
     categories: [],
-    priceRange: [],
+    priceRange: { min: 0, max: 1000, includes: (id: number) => false },
     colors: []
   });
    if (!Type || !Array.isArray(Type)) {
@@ -287,6 +287,18 @@ const Sidee: React.FC = () =>{
 
   const handleFilterChange = (filterType: string, value: string) => {
     setFilters(prev => {
+      if (filterType === "priceRange") {
+        const range = JSON.parse(value);
+        return {
+          ...prev,
+          priceRange: {
+            ...range,
+            includes: (id: number) => {
+              return filterData.priceRange.some(r => r.id === id && r.min === range.min && r.max === range.max);
+            }
+          }
+        };
+      }
       const currentFilters = prev[filterType as keyof typeof prev] as string[];
       if (currentFilters.includes(value)) {
         return {
@@ -304,8 +316,9 @@ const Sidee: React.FC = () =>{
   console.log('Sidee component rendering');
   console.log('Type data:', Type);
     return(
-        <Layout>
+       
          <div className="Big-container">
+           <Layout>
             <div className="first-part">
                 <h2 className="first-heading"> Shop Left Sidebar</h2>
                 <div className="buttons">
@@ -341,10 +354,10 @@ const Sidee: React.FC = () =>{
             </div>
 
             </div>
-            
+           </Layout> 
           
         </div>
-        </Layout>
+        
 
     )
 }

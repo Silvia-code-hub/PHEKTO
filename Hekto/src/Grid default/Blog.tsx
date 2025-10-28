@@ -10,8 +10,9 @@ interface BlogstuffProps{
 }
 const Blogg: React.FC<BlogstuffProps> = ({ Bloggitems }) => {
     return (
-        <Layout>
+        
             <div className="whole-page">
+                <Layout>
                 <div className="blog-page">
                     <h2 className="page-title">Blog Page</h2>
                     <div className="buttons">
@@ -211,11 +212,12 @@ const Blogg: React.FC<BlogstuffProps> = ({ Bloggitems }) => {
                 <div className="adt-image">
                    <img src="src/assets/images/image_015.png" alt="" />
                </div>
+               </Layout>
 
             </div>
 
         
-        </Layout>
+        
     );
 };
 export default Blogg;

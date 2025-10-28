@@ -61,8 +61,9 @@ const ShopListItem: React.FC<ShopListItemProps> = ({item}) =>{
 }
 const ShopList: React.FC = () =>{
     return(
-        <Layout>
+        
          <div className="Big-container">
+          <Layout>
             <div className="first-part">
                 <h2 className="first-heading"> Shop List</h2>
                 <div className="buttons">
@@ -87,8 +88,9 @@ const ShopList: React.FC = () =>{
             <img src="src/assets/images/image_015.png" alt="" />
           </div>
         </div>
-        </div>
         </Layout>
+        </div>
+        
 
     )
 }

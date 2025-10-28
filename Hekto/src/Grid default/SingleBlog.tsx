@@ -52,8 +52,9 @@ const Blogproduct:Blogs[]=[
 
 const SingleBlog: React.FC<Blogs> = (Blogproduct) => {
     return(
-        <Layout>
+        
             <div className="page">
+                <Layout>
                 <div className="top-part">
                     <div className="top-box">
                         <h2 className="page-title">Single Blog</h2>
@@ -310,10 +311,11 @@ const SingleBlog: React.FC<Blogs> = (Blogproduct) => {
                                                
                        
                 </div>
+                </Layout>
 
             </div>
             
-        </Layout>
+        
     )
 }
 export default SingleBlog;

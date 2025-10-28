@@ -2,8 +2,9 @@ import Layout from "../Components/layout";
 import "./HektoDemo.css"
 const HektoDemo: React.FC = () => {
     return(
-        <Layout>
+       
             <div className="main-cont">
+                 <Layout>
                 <div className="title">
                     <h2 className="main-heading">Hekto Demo</h2>
                 </div>
@@ -157,8 +158,9 @@ const HektoDemo: React.FC = () => {
                     </div>
 
                 </div>
+                </Layout>
             </div>
-            </Layout>
+            
     );
 }
 export default HektoDemo;

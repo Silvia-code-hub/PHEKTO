@@ -3,9 +3,10 @@ import ShopexItem from "../Sections/ShopexCard";
 import "./AboutUs.css"
 const AboutUs = () => {
     return(
-        <Layout>
+        
 
             <div className="full">
+                <Layout>
                 <div className="top">
                     <h2 className="top-header">About Us</h2>
                     <div className="buttons">
@@ -49,10 +50,11 @@ const AboutUs = () => {
                                       </div>
 
                       </div>
+                      </Layout>
             </div>
 
 
-        </Layout>
+        
     )
 }
 export default AboutUs;

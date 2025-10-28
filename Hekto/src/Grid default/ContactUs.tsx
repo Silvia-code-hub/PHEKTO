@@ -12,9 +12,10 @@ const colors: colors[] = [
 
 const ContactUs:React.FC = () => {
     return(
-        <Layout>
+        
 
             <div className="bigpage">
+              <Layout>
                   <div className="upper">
                     <h2 className="upper-heading">Contact Us</h2>
                     <div className="buttons">
@@ -103,10 +104,11 @@ const ContactUs:React.FC = () => {
 
                               </div>
                       </div>
+                      </Layout>
             </div>
 
 
-        </Layout>
+        
     )
 }
 export default ContactUs;
