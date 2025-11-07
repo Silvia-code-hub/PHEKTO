@@ -1,5 +1,5 @@
 
-import Layout from "./layout";
+
 import HeroSection from "../Sections/Herosection";
 import ProductGrid from "../Sections/ProductGrid";
 import LeastGrid from "../Sections/LeatestGrid";
@@ -13,11 +13,15 @@ import TopGrid from "../Sections/TopGrid";
 import Banner from "../Sections/Banner";
 import Adt from "../Sections/Adt";
 import BlogGrid from "../Sections/LeatestBlogGrid";
+import "./HomePage.css"
+import Layout from "./layout"
 
 const HomePage =() =>{
     return(
-       <div>
+       <div className="homepage-container">
         <Layout>
+
+        <div className="homepage-sections">
             <HeroSection/>
             <ProductGrid/>
             <LeastGrid/>
@@ -31,11 +35,10 @@ const HomePage =() =>{
             <Banner/>
             <Adt/>
             <BlogGrid/>
-
-
-
+    </div>
             
         </Layout>
+        
        </div>
 
     )

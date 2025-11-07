@@ -10,9 +10,12 @@ interface LayoutProps {
             <div>
                 <Header/>
                 <Navigation/>
-                <main style={{ padding: '2rem' }}>
-            {children} {/* This is where your page content will be rendered */}
-          </main>
+                
+
+                 <main style={{ padding: '2rem' }}>
+            {children}
+          </main> 
+          
           <Footer />
             </div>
         )
