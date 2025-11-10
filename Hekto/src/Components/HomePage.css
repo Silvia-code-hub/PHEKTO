@@ -10,4 +10,11 @@
   display: flex;
   flex-direction: column;
   gap: 0 ; 
+  font-family: josefin sans-serif;
+}
+@media(max-width: 750px){
+  .homepage-sections {
+    gap: 1rem;
+    flex-direction: column; 
+  }
 }

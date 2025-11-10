@@ -1,5 +1,5 @@
 header{
-background: rgb(100, 5, 189);
+background: #7E33E0;
 color: white;
 display: flex;
 justify-content: space-between;
@@ -9,20 +9,26 @@ width:100%;
 position: sticky;
 top: 0;
 z-index: 1000;
+
 }
 .contact-info {
 margin-right: auto;
-font-size: small;
+font-size: 16px;
+font-weight: 600;
 justify-content: space-between;
+
 
 
 }
 form select{
     background-color: transparent;
-    color: black;
+    color: #fff;
     border: none;
 
     
+}
+option{
+    color: #000;
 }
 ul li a{
     display: flex;
@@ -35,9 +41,13 @@ ul li a{
     
     
 }
-.shoppingcart{
-    padding-top: 2rem;
-    gap: 5px;
+.shopping-cart{
+  
+  margin-left: 10px;
+    background-color:#7E33E0;
+    
+    
+    
  
 }
  

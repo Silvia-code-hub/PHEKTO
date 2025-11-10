@@ -14,7 +14,7 @@ export const products: Product[] = [
     name: "Cantilever chair",
     code: "Y523201",
     price: 42.00,
-    image: "src/assets/images/image_1170.png",
+    image: "src/assets/images/image_0.png",
     
   },
   {

@@ -39,7 +39,7 @@ function Header (){
         <ul><li key="wishlist"><a href="#">Wishlist <FaRegHeart /> </a></li></ul>
         
 
-       <FaShoppingCart />
+       <span className='shopping-cart'><FaShoppingCart /></span>
             
         </header>
     )

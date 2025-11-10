@@ -121,13 +121,13 @@ const Navigation = () => {
 
         
         </div>
-        <form className='Search-box' onSubmit={handleSearch}>
+        <form className='search-box' onSubmit={handleSearch}>
           <input
             type="text"
             placeholder=''
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)} />
-          <button type="submit" aria-label="Search">
+          <button className="navbar-submit" aria-label="Search">
             <FaSearch />
           </button>
 
