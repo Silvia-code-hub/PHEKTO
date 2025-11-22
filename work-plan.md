@@ -1,9 +1,19 @@
-Frontend
+CI/CD 
+1. Work off of develop(develop) - 
+2. Work feature branch -> push to develop -> main (production)
+Deploy the site on vercel. (manually )
+Workflow to aut deploy once merged to main
+
+3. Frontend
 Update this website to use tailwind and config to make sure
 Update the website to make it mobile responsive
 Match webite to deisgns (Fonts, colors, border radiuses etc)
 Update 
 Remove all static data
+
+
+
+
 
 
 Backend
