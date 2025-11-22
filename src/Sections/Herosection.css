@@ -1,27 +1,15 @@
-.herosection-container{
-  top: 12px;
-  background: #F2F0FF;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 2rem;
-  height: 764px;
-  
-  
-  
-  
-  
-  
-}
- h1, h2, h3,button{
+h1,
+h2,
+h3,
+button {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  
-  
+
+
 }
 
-.HeroSection{
+.HeroSection {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -29,23 +17,24 @@
   font-family: josefin sans, sans-serif;
 
 }
-.hero-content{
-    align-items: center;
-    margin: 0;
-    top: 0%;
-    line-height: 60%;
-    flex-direction: column;
-    display: grid;
-    justify-content: center;
-    text-align: center;
-    
-    position: relative;
-    padding: 0 2rem;
-    vertical-align:baseline;
-    
-    
-  
-    
+
+.hero-content {
+  align-items: center;
+  margin: 0;
+  top: 0%;
+  line-height: 60%;
+  flex-direction: column;
+  display: grid;
+  justify-content: center;
+  text-align: center;
+
+  position: relative;
+  padding: 0 2rem;
+  vertical-align: baseline;
+
+
+
+
 }
 
 
@@ -53,26 +42,26 @@
 
 
 
-  
 
 
-  
-  
 
-.promotional-image.left img{
-flex-wrap: wrap;
-flex: 1;
-flex-grow: 1;
-flex-shrink: 1;
-background-color: transparent;
-background-color: #F2F0FF;
-  
 
-  
+
+
+.promotional-image.left img {
+  flex-wrap: wrap;
+  flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  background-color: transparent;
+  background-color: #F2F0FF;
+
+
+
 
 }
 
-.hero-btn{
+.hero-btn {
   background: #FB2E86;
   width: 163px;
   height: 50px;
@@ -80,17 +69,19 @@ background-color: #F2F0FF;
   border-radius: 2px;
   color: #FFFFFF;
   cursor: pointer;
-  
+
 }
-.hero-content{
- text-align: left;
- margin-left: -150px;
- width: 644px;
- height: 248px;
- 
- 
+
+.hero-content {
+  text-align: left;
+  margin-left: -150px;
+  width: 644px;
+  height: 248px;
+
+
 }
-.hero-subtitle{
+
+.hero-subtitle {
   width: 230px;
   height: 28px;
   font-weight: 700;
@@ -100,7 +91,8 @@ background-color: #F2F0FF;
 
 
 }
-.hero-title{
+
+.hero-title {
   color: #000;
   width: 644px;
   height: 140px;
@@ -111,15 +103,15 @@ background-color: #F2F0FF;
   line-height: 120%;
 
 }
-.hero-Subtitle{
+
+.hero-Subtitle {
   color: #8A8FB9;
   width: 559px;
   height: 56px;
   font-weight: 600;
   font-size: 16px;
   line-height: 20px;
- 
-  
+
+
 
 }
-

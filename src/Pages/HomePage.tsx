@@ -4,18 +4,15 @@ import Banner from "../Sections/Banner";
 import Adt from "../Sections/Adt";
 import Layout from "../Components/layout";
 
-const HomePage =() => {
-    return(
-        <div className="Homepage-container"> 
-        <Layout>
-            <div className="homepage-sections">
-                <HeroSection/>
-                <LandT/>
-                <Banner/>
-                <Adt/>
-            </div>
-        </Layout>
-
+const HomePage = () => {
+    return (
+        <div className="Homepage-container">
+            <Layout>
+                <HeroSection />
+                <LandT />
+                <Banner />
+                <Adt />
+            </Layout>
         </div>
     )
 }
