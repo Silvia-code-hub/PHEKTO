@@ -1,0 +1,17 @@
+.product-grid-container {
+    background-color: white;
+    margin-top: 0;
+}
+
+.page-title {
+    color: rgb(5, 51, 150);
+
+
+}
+
+.product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 25px;
+}

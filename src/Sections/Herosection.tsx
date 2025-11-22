@@ -1,28 +1,30 @@
 
-import  './Herosection.css';
+import './Herosection.css';
 
 const HeroSection = () => {
-  return(
-    <div className="herosection-container">
-      <div className="promotional-image left">
-        <img src="/src/assets/images/image_32.png"  />
+  return (
+    <div className="flex justify-between items-center bg-[#F6F5FF]">
+      <div className="flex items-center">
+        <img src="/src/assets/images/image_32.png" className='w-1/2' />
+        <div className=''>
+          <h3 className="hero-subtitle">Best Furniture For Your Castle....</h3>
+          <h1 className="hero-title">New Furniture Collection Trends in 2020</h1>
+          <h2 className="hero-Subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.</h2>
+          <button className='hero-btn'> Shop Now
+          </button>
+        </div>
       </div>
 
-      <div className='hero-content'>
-        <h3 className="hero-subtitle">Best Furniture For Your Castle....</h3>
-        <h1 className="hero-title">New Furniture Collection Trends in 2020</h1>
-        <h2 className="hero-Subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.</h2>
-        <button className='hero-btn'> Shop Now
-          
-          </button>
+      <div>
+
+        <div className=''>
+          <img src="/src/assets/images/sofa promotional header.png" alt="" />
+        </div>
+
       </div>
-      <div className='promotional-image right'>
-        <img src="/src/assets/images/sofa promotional header.png" alt="" />
-      </div>
-      
 
     </div>
-   )
+  )
 }
 
 /*interface HeroSectionProps {
@@ -63,4 +65,3 @@ const HeroSection = (props :HeroSectionProps) => {
 
 export default HeroSection;
 
-    

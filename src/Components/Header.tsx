@@ -1,19 +1,20 @@
 import './Header.css';
-import {FaRegUser, FaRegHeart, FaShoppingCart, FaEnvelope, FaPhoneAlt} from 'react-icons/fa'
+import { FaRegUser, FaRegHeart, FaShoppingCart, FaEnvelope, FaPhoneAlt } from 'react-icons/fa'
 
-function Header (){
-    
-    return(
-        
+function Header() {
 
-        <header>
-            
-            
-            <div className="contact-info">
-             <FaEnvelope /> email:mhhasanul@gmail.com
-             <FaPhoneAlt /> phone:(12345)67890
-            </div>
-             
+  return (
+
+
+    <header className='flex justify-between items-center'>
+
+
+      <div className="contact-info flex justify-between items-center gap-2 p-2">
+        <FaEnvelope /> email:mhhasanul@gmail.com
+        <FaPhoneAlt /> phone:(12345)67890
+      </div>
+
+      <div className='flex justify-between items-center gap-2 p-2'>
         <form>
           <select name="language" id="language">
             <option value="English">English</option>
@@ -23,7 +24,7 @@ function Header (){
             <option value="Chinese">Chinese</option>
           </select>
         </form>
-            
+
         <form>
           <select name="currency" id="currency">
             <option value="USD">USD</option>
@@ -33,16 +34,17 @@ function Header (){
             <option value="CNY">CNY</option>
           </select>
         </form>
-        
-        <ul><li key="login"><a href="#">login <FaRegUser /> </a></li></ul>
-        
-        <ul><li key="wishlist"><a href="#">Wishlist <FaRegHeart /> </a></li></ul>
-        
 
-       <span className='shopping-cart'><FaShoppingCart /></span>
-            
-        </header>
-    )
+        <ul><li key="login"><a href="#">login <FaRegUser /> </a></li></ul>
+
+        <ul><li key="wishlist"><a href="#">Wishlist <FaRegHeart /> </a></li></ul>
+
+
+        <span className='shopping-cart'><FaShoppingCart /></span>
+      </div>
+
+    </header>
+  )
 }
 
 
