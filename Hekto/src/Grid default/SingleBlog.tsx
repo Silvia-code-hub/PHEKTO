@@ -1,4 +1,4 @@
-import Layout from "../Components/layout";
+import Layout from "../Components/Layout";
 import { FaPenNib } from "react-icons/fa";
 import { FaCalendarDays } from "react-icons/fa6";
 import {  FaSearch,FaFacebook,FaInstagramSquare, FaTwitterSquare } from 'react-icons/fa';

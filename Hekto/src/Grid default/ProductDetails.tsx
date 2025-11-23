@@ -2,7 +2,7 @@ import React from "react";
 import { FaRegHeart, FaFacebook,FaInstagramSquare, FaTwitterSquare, FaArrowRight } from 'react-icons/fa';
 
 import type { Relates } from "./ProductDetailsItems";
-import Layout from "../Components/layout";
+import Layout from "../Components/Layout";
 import "./ProductDetails.css"
 interface ProductDetailsProps{
     relates: Relates;

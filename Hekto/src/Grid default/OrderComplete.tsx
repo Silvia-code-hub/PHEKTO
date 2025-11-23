@@ -1,4 +1,4 @@
-import Layout from "../Components/layout";
+import Layout from "../Components/Layout";
 import "./OrderComplete.css"
 import { FaRegClock } from "react-icons/fa";
 import { FaClipboardList } from "react-icons/fa";

@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import type { CartItem } from "./ShoppingCartitems";
-import Layout from "../Components/layout";
+import Layout from "../Components/Layout";
 import CartItemRow from "./CartItemRow";
 import "./ShoppingCart.css"
 

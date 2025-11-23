@@ -1,4 +1,4 @@
-import Layout from "../Components/layout";
+import Layout from "../Components/Layout";
 import "./MyAcc.css"
 
 const MyAcc: React.FC = () => {

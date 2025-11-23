@@ -2,7 +2,7 @@ import ProductGrid from "../Sections/ProductGrid";
 import LeastGrid from "../Sections/LeatestGrid";
 import ShopexCard from "../Sections/ShopexCard";
 import TopGrid from "../Sections/TopGrid";
-import Layout from "../Components/layout";
+import Layout from "../Components/Layout";
 
 const ProductsPage =() => {
     return(

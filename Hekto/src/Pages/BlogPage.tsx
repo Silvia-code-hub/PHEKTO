@@ -1,5 +1,5 @@
 import BlogGrid from "../Sections/LeatestBlogGrid";
-import Layout from "../Components/layout";
+import Layout from "../Components/Layout";
 
 const BlogPage =() => {
     return(

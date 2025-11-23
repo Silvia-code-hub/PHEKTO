@@ -1,4 +1,4 @@
-import Layout from "../Components/layout";
+import Layout from "../Components/Layout";
 import type{ Product } from "./Defaultitems";
 import { FaShoppingCart,FaRegHeart,FaSearchPlus } from 'react-icons/fa';
 import "./Default.css"
