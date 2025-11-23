@@ -4,6 +4,7 @@ import  './Herosection.css';
 const HeroSection = () => {
   return(
     <div className="herosection-container">
+      
       <div className="promotional-image left">
         <img src="/src/assets/images/image_32.png"  />
       </div>

@@ -3,7 +3,17 @@
 }
 .disc-subtitle{
     color:  rgb(0, 52, 164); 
-    font-size: large;
+    font-size: 24px;
     font-weight: 600;
     text-align: center;
+}
+.disc-button{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    color: #151875;
+    justify-content: center;
+}
+.disc-nav-link{
+    color: #151875;
 }

@@ -11,9 +11,13 @@
     justify-content: space-evenly;
     
 }
-.submit{
-    background-color: rgb(181, 41, 86);
+.footer-submit{
+    background-color: #FB2E86;
+    width: 135px;
     color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    padding-top: 20px;
 }
 .min{
     background-color: #E7E4F8;

@@ -11,18 +11,21 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
    
     <div className="product-card">
+      <div className='product-container-top'>
       <div className="product-icon"> 
-        <FaShoppingCart/>
-        <FaRegHeart/>
-        <FaSearchPlus/>
+       <span className="product-shop-icon"><FaShoppingCart/></span>
+       <span className="product-heart-icon"><FaRegHeart/></span>
+        <span className="product-searchplus-icon"><FaSearchPlus/></span>
 
 
       </div>
       <div className="product-image">
         <img src={product.image} alt={product.name} />
-        <span className="product-id">ID: {product.id}</span>
+        <span className="product-id">{product.id}</span>
       </div>
-      <button className="view-details-btn">View details</button>
+      
+      </div>
+      <button className="view-details-btn">View Details</button>
       <div className="product-info">
         <h3 className="product-name">{product.name}</h3>
         <p className="product-code">{product.code}</p>

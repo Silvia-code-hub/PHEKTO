@@ -5,6 +5,10 @@ import ProductsPage from "./Pages/ProductsPage";
 import TrendingPage from "./Pages/TrendingPage";
 import BlogPage from "./Pages/BlogPage";
 
+
+
+
+
 const AppRouter = () => {
     return(
         <Router>
@@ -13,6 +17,11 @@ const AppRouter = () => {
                 <Route path="/products" element={<ProductsPage/>}/>
                 <Route path="/trending" element={<TrendingPage/>}/>
                 <Route path="/blog" element={<BlogPage/>}/>
+                {/* <Route path="//:id" element={<dropdowns/>}/> */}
+                
+
+
+                
             </Routes>
         </Router>
     )

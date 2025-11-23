@@ -15,16 +15,17 @@ const Top: React.FC<TopProps> =({item}) =>{
         
         <div className="top-card">
             <div className="top-image-container">
-            <div className="top-image">
-               <img src={item.image} alt={item.name} />
-               
+              <div className="top-image">
+                  <img src={item.image} alt={item.name} />
+               </div>
+               <button className="view-shop-btn">View Shop</button>
             </div>
-            </div>
-            <button className="view-shop-btn">View Shop</button>
+            
             <div className="top-info">
                <h2 className="top-name">{item.name}</h2>
                <div className="top-price">{item.price.toFixed(2)}</div> 
             </div>
+            <ul> </ul>
 
          </div>
 

@@ -4,22 +4,30 @@
 }
 .page-subtitle{
      text-align: center;
-     color: rgb(38, 38, 125);
-     font-size: large;
-     font-weight: 500;
+     color:#151875;
+     font-size: 40px;
+     font-weight: 700;
+     
 }
-.page-button{
+.pages-button{
 
     display: flex;
     flex-direction: row;
     opacity: 1;
     justify-content: center;
+    gap: 45px;
+    margin-bottom: 20px;
+    
+     
 }
 div button{
-    color: rgb(27, 27, 116);
+    color: #151875;
     justify-content: center;
-}
+    border: none;
+    font-weight: 600;
+    font-size: 16px;
+} 
 div button:hover{
-    color: brown;
+    color:#FB4997;
     text-decoration: underline;
 }

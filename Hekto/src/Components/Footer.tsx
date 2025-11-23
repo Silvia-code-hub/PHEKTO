@@ -8,7 +8,7 @@ const Footer =() =>{
                  <h2 className="sub"> Hekto</h2>
                  <form action="/submit-email">
                    <input type="email" name="email" id="Enter Email Address" />
-                   <button type="submit">Sign Up</button>
+                   <button className="footer-submit">Sign Up</button>
                  </form>
                  <p>Contact Info</p>
                  <p>17 Princess Road, London, Greater London NW1 8JR, UK</p>

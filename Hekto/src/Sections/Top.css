@@ -1,15 +1,17 @@
 .top-card{
+    max-width: 100%;
     width: 269px;
-    height: 360px;
+    height: 345px;
     display: flex;
     flex-direction: column;
     background: #fff;
     border-radius: 5%;
-    object-fit: contain;
+   margin-right: 20px;
     align-items: center;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-    position: relative;
+    
+   
 }
 
 .top-card:hover {
@@ -17,16 +19,21 @@
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 .top-image-container{
-    position: relative;
-    width: 100%;
-    background: rgba(96, 113, 151, 0.751);
-    height: 200px;
-    overflow: hidden;
+    
+    width: 269px;
+    background: rgba(201, 201, 202, 0.751);
+    height: 269px;
+    gap: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom-left-radius: 50% 40%;
-    border-bottom-right-radius: 50% 40%;
+    border-radius: 50%;
+    box-shadow: x 0 y 8;;
+    
+}
+.top-image{
+    width: 158px;
+    height: 157px;
 }
 img{
      max-width: 100%;
@@ -42,6 +49,7 @@ img{
     width: 100%;
     display: flex;
     flex-direction: column;
+    margin-top: 60px;
    
 }
 
@@ -69,13 +77,16 @@ img{
   justify-content: center;
   position: absolute;
   bottom: 70px;
-  left: 50%;
+  left: 30%;
   transform: translateX(-50%) translateY(20px);
   font-size: small;
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
   z-index: 3;
+  line-height: 100%;
+  letter-spacing: 0%;
+ 
   
   
 }

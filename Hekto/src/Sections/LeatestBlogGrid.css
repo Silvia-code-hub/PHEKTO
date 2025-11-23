@@ -9,4 +9,6 @@
 .blog-grid{
     display: flex;
     justify-content: space-evenly;
+    flex-wrap:nowrap;
+    gap: 30px;
 }

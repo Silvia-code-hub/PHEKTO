@@ -1,20 +1,22 @@
 import { useState,  type FormEvent } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link,useNavigate } from 'react-router-dom';
+import{Link,  useLocation, useNavigate} from 'react-router-dom';
+ //import { BrowserRouter as Router, Routes, Route,  } from 'react-router-dom';
 import './Navbar.css'
 import { FaSearch, FaChevronUp, FaChevronDown } from 'react-icons/fa';
-import ShopList from "../Grid default/ShopList";
-import Sidee from "../Grid default/Sidebar";
-import ProductDetails from "../Grid default/ProductDetails";
-import ShoppingCart from "../Grid default/ShoppingCart";
-import OrderComplete from "../Grid default/OrderComplete";
-import HektoDemo from "../Grid default/HektoDemo";
-import MyAcc from "../Grid default/MyAcc";
-import Blogg from "../Grid default/Blog";
-import SingleBlog from "../Grid default/SingleBlog";
-import AboutUs from "../Grid default/AboutUs";
-import ContactUs from "../Grid default/ContactUs";
-import NotFound from "../Grid default/NotFound";
-import Faq from "../Grid default/Faq";
+
+// import ShopList from "../Grid default/ShopList";
+// import Sidee from "../Grid default/Sidebar";
+// import ProductDetails from "../Grid default/ProductDetails";
+// import ShoppingCart from "../Grid default/ShoppingCart";
+// import OrderComplete from "../Grid default/OrderComplete";
+// import HektoDemo from "../Grid default/HektoDemo";
+// import MyAcc from "../Grid default/MyAcc";
+// import Blogg from "../Grid default/Blog";
+// import SingleBlog from "../Grid default/SingleBlog";
+// import AboutUs from "../Grid default/AboutUs";
+// import ContactUs from "../Grid default/ContactUs";
+// import NotFound from "../Grid default/NotFound";
+// import Faq from "../Grid default/Faq";
 
 
 
@@ -22,15 +24,14 @@ const Navigation = () => {
 
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const navigate = useNavigate();
+  const location = useLocation();
 
 
 
   const handleSearch = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(searchQuery);
-  };
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
   };
 
   const closeDropdown = () => {
@@ -55,6 +56,12 @@ const Navigation = () => {
 
   ];
 
+  const isActive = (path: string) => location.pathname === path;
+
+  const handleDropdownClick = (path: string) => {
+    navigate(path); 
+    closeDropdown();
+
 
   
 
@@ -64,8 +71,10 @@ const Navigation = () => {
       
         <div className='nav-container'>
           <div className='dropdown-container'>
-            <button className='nav-link dropdown-trigger'
-            onClick={toggleDropdown}
+            <Link
+            to="/"
+             className={`nav-link dropdown-trigger ${isActive("/") ? "active" : ""}`}
+            
             onMouseEnter={() => setIsDropdownOpen(true)}
             aria-haspopup="true"
             aria-expanded={isDropdownOpen}>
@@ -73,7 +82,7 @@ const Navigation = () => {
               <span className='dropdown-icon'>
                  {isDropdownOpen ? <FaChevronUp /> : <FaChevronDown />}
               </span>
-            </button>
+            </Link>
             {isDropdownOpen &&(
               <div className='dropdown-menu'
               onMouseLeave={closeDropdown}>
@@ -82,17 +91,14 @@ const Navigation = () => {
                                 
                   {menuItems.map((item) => (
                     <li key={item.id} className='dropdown-item'>
-                      <a
-                        href={item.path}
-                        className='dropdown-link'
-                        onClick={(e) => {
-                          e.preventDefault();
-                        //  navigate(item.path);
-                          closeDropdown();
-                        }}
+                      <Link 
+                        to={item.path}
+                        className={`dropdown-link ${isActive(item.path) ? "active" : ""}`}
+                        onClick={() => handleDropdownClick(item.path)}
                       >
                         {item.label}
-                      </a>
+                         
+                      </Link>
                     </li>
                   ))} 
                 </ul> 
@@ -104,19 +110,20 @@ const Navigation = () => {
         
           
         <div>
-          <button className="nav-link">Pages</button>
+          <Link to="/trending" className={`nav-link ${isActive('/trending') ? 'active' : ''}`} >Trending</Link>
+               {/* <TrendingPage/> */}
         </div>
         <div>
-          <button className="nav-link">Products</button>
+          <Link to="/products" className={`nav-link ${isActive('/products') ? 'active' : ''}`} >Products</Link>
         </div>
         <div>
-          <button className="nav-link">Blog</button>
+          <Link to="/blog" className={`nav-link ${isActive('/blog') ? 'active' : ''}`} >Blog</Link>
         </div>
         <div>
-          <button className="nav-link">Shop</button>
+          <Link to="/shop" className={`nav-link ${isActive('/shop') ? 'active' : ''}`} >Shop</Link>
         </div>
         <div>
-          <button className="nav-link">Contact </button>
+          <Link to="/contact-us" className={`nav-link ${isActive('/contact-us') ? 'active' : ''}`} >Contact Us</Link>
         </div>
 
         
@@ -140,76 +147,6 @@ const Navigation = () => {
       
       
   );
-};
+}};
 
 export default Navigation;
-
-
-
-
-
-      {/* <Router>
-      <nav>
-        <Link to="/">Home Page</Link> |
-         <Link to="/grid">Grid default</Link>|
-         <Link to="/shop-list">Shop List</Link>|
-         <Link to="/side-bar">Sidebar</Link> | 
-         <Link to="/product-details">Product Details</Link>|
-          <Link to="/shopping-cart">Shopping Cart</Link> |
-          <Link to="/order-complete">Order Complete</Link>|
-          <Link to="/hekto-demo">Hekto Demo</Link> |
-          <Link to="/my-acc">My Account</Link> |
-          <Link to="/blog">Blog</Link> |
-          <Link to="/single-blog">Single Blog</Link> |
-          <Link to="/about-us">About Us</Link> |
-          <Link to= "/contact-us">Contact Us</Link> |
-          <Link to= "/not-found">404 Not Found</Link> |
-          <Link to= "/faq">Faq</Link>
-          
-          
-      </nav>
-      <Routes>
-       <Route path="/" element={<div>Home Page</div>}/>
-        <Route path="/grid" element={<Default products={products}  />} />
-        <Route path="/shop-list" element={<ShopList /> } />
-        <Route path="/side-bar" element={<Sidee />} />
-        <Route path="/product-details" element={<ProductDetails relates={{
-          id: 0,
-          image: "",
-          name: "",
-          rating: 0 ,
-          price: 0
-        }} />} />
-        <Route path="/shopping-cart" element={<ShoppingCart /> } />
-        <Route path="/order-complete" element={<OrderComplete /> } />
-        <Route path="/hekto-demo" element={<HektoDemo /> } />
-        <Route path="/my-acc" element={<MyAcc /> } />
-        <Route path="/blog" element={<Blogg Bloggitems={{
-          id: 0,
-          image: "",
-          name: "",
-          date: "",
-          description: "",
-          title: ""
-        }} />} />
-        <Route path="/single-blog" element={<SingleBlog Blogproduct={{
-          id: 0,
-          image: "",
-          name: "",
-          date: "",
-          description: "",
-          title: ""
-        }} />} />
-        <Route path="/about-us" element={<AboutUs />} />
-        <Route path="/contact-us" element={<ContactUs/>} />
-        <Route path="/not-found" element={<NotFound/>} />
-        <Route path="/faq" element={<Faq/>} />
-        
-        
-       
-        
-       
-         
-      </Routes>
-    </Router>
-       */}

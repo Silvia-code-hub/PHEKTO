@@ -1,5 +1,7 @@
 .adt-container{
     background: #fff;
+    max-width: 100%;
+    flex-wrap: wrap;
 }
 .adt-image{
    

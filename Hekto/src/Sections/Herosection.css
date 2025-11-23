@@ -5,7 +5,9 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 2rem;
-  height: 764px;
+  height: 560px;
+  flex-wrap: nowrap;
+ 
   
   
   
@@ -38,27 +40,13 @@
     display: grid;
     justify-content: center;
     text-align: center;
-    
-    position: relative;
-    padding: 0 2rem;
-    vertical-align:baseline;
+    padding: 10%;
+   
     
     
   
     
 }
-
-
-
-
-
-
-  
-
-
-  
-  
-
 .promotional-image.left img{
 flex-wrap: wrap;
 flex: 1;
@@ -66,6 +54,8 @@ flex-grow: 1;
 flex-shrink: 1;
 background-color: transparent;
 background-color: #F2F0FF;
+margin-left: -30px;
+
   
 
   
@@ -77,9 +67,10 @@ background-color: #F2F0FF;
   width: 163px;
   height: 50px;
   border: none;
-  border-radius: 2px;
+  border-radius: 8px;
   color: #FFFFFF;
   cursor: pointer;
+  padding-top: 17px;
   
 }
 .hero-content{
@@ -87,6 +78,7 @@ background-color: #F2F0FF;
  margin-left: -150px;
  width: 644px;
  height: 248px;
+ flex-wrap: wrap;
  
  
 }

@@ -9,21 +9,22 @@ interface LeatestCardProps{
 const LeastCard: React.FC<LeatestCardProps> = ({ product }) =>{
     return (
         <div className="least-card">
-            
-            <div className="product-image">
+            <div className="least-toppart">
+            <div className="least-product-image">
                 <img src={product.image} alt={product.name} />
 
             </div>
-            <div className="least-icons">
-                <FaShoppingCart/>
-                <FaRegHeart/>
-                <FaSearchPlus/>
+            <div className="least-icon">
+                <span className="shop-icon"><FaShoppingCart/></span>
+                <span className="heart-icon"><FaRegHeart/></span>
+                <span className="searchplus-icon"><FaSearchPlus/></span>
+            </div>
             </div>
             <div className="least-info">
                 <h2 className="least-name">Comfort Handy Craft</h2>
                 <div className="least-price">
                 <div className="new-price">${product.newprice.toFixed(2)}</div>
-                <div className="old-price">${product.oldprice.toFixed(2)}</div>
+                <div className="old-prices">${product.oldprice.toFixed(2)}</div>
                 </div>
                 
             </div>
