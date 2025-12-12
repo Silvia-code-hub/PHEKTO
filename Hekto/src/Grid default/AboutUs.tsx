@@ -1,4 +1,4 @@
-import Layout from "../Components/Layout"
+import Layout from "../Components/layout"
 import ShopexItem from "../Sections/ShopexCard";
 import "./AboutUs.css"
 const AboutUs = () => {

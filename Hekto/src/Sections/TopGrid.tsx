@@ -1,5 +1,5 @@
 import Top from "./Top";
-import "./TopGrid.css"
+
 interface TopItem{
     id:number;
     image:string;
@@ -36,9 +36,9 @@ const TopGrid: React.FC = () =>{
 
     ];
     return(
-         <div className="top-grid-container">
-            <h2 className="top-title">Top Categories</h2>
-            <div className="top-grid">
+         <div className="flex-wrap">
+            <h2 className="w-full text-center font-bold text-[42px] text-blue-shade mb-7">Top Categories</h2>
+            <div className="flex flex-wrap justify-between gap-5 ">
                 {items.map(item => (
                     <Top key={item.id} item={item} />
                 ))}

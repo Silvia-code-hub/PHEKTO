@@ -1,4 +1,4 @@
-import "./Adt.css"
+
 const Adt =() =>{
     return(
         <div className="adt-container">

@@ -1,6 +1,6 @@
 import React from "react";
 import {  type ShopexCardProps, shopexData } from "./ShopexType";
-import "./ShopexCard.css";
+ 
 
 
 const ShopexCard: React.FC<ShopexCardProps> = ({image,title,description}) => {
@@ -8,13 +8,13 @@ const ShopexCard: React.FC<ShopexCardProps> = ({image,title,description}) => {
 
     
     return(
-        <div className="shopex-card">
-            <div className="shopex-image">
+        <div className="w-[270px] h-[320px] bg-white">
+            <div className="w-[65px] h-[65px] text-center ml-12 mb-5">
                 <img src={image} alt={title}/>
 
         </div>
-            <h3 className="shopex-card-title">{title}</h3>
-            <p className="shopex-card-description">{description}</p>
+            <h3 className="text-blue-shade font-semibold text-[22px] leading-[1.00] w-[142px] h-[22px] ml-10 mb-5">{title}</h3>
+            <p className="text-gray-faint w-[217px] h-[85px] ml-5 mb-5">{description}</p>
 
                 
 
@@ -27,9 +27,9 @@ const ShopexCard: React.FC<ShopexCardProps> = ({image,title,description}) => {
 
 const ShopexItem: React.FC = () => {
     return (
-        <div className="shopex-container">
-            <h1 className="shopex-subtitle">What Shopex Offers!</h1>
-            <div className="shopex-grid">
+        <div className="flex-wrap">
+            <h1 className="font-bold text-[42px] leading-[1.00] w-full text-center h-[42px] text-blue-shade mb-10 mt-10">What Shopex Offer!</h1>
+            <div className="flex flex-wrap justify-between ">
                 {shopexData.map((item, index) => (
                     <ShopexCard 
                         key={index}

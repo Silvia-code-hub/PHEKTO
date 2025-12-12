@@ -1,6 +1,6 @@
 import{  Type, type shop  } from "./ShopListItems";
 import "./ShopList.css"
-import Layout from "../Components/Layout";
+import Layout from "../Components/layout";
 import { FaShoppingCart,FaRegHeart,FaSearchPlus } from 'react-icons/fa';
 interface ShopListItemProps {
   item: shop;

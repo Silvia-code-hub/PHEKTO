@@ -2,7 +2,7 @@ import HeroSection from "../Sections/Herosection";
 import LandT from "../Sections/LandT";
 import Banner from "../Sections/Banner";
 import Adt from "../Sections/Adt";
-import Layout from "../Components/layout";
+import Layout from "../Components/\Layout";
 // import { Link } from "react-router-dom";
 // import { Router,Route,Routes} from "react-router-dom"
 // import ShopList from "../Grid default/ShopList";

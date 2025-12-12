@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { type SideBar, type FilterData, type FilterOptions, Type } from "./SidebarItems";
 import "./Sidebar.css"
 import { FaShoppingCart,FaRegHeart,FaSearchPlus } from 'react-icons/fa';
-import Layout from "../Components/Layout";
+import Layout from "../Components/layout";
 
 interface SidebarItemProps {
   item: SideBar;

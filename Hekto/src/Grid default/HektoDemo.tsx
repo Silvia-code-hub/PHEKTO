@@ -1,4 +1,4 @@
-import Layout from "../Components/Layout";
+import Layout from "../Components/layout";
 import "./HektoDemo.css"
 const HektoDemo: React.FC = () => {
     return(

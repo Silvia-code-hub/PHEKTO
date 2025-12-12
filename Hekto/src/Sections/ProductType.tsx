@@ -12,7 +12,7 @@ export const products: Product[] = [
   {
     id: 1,
     name: "Cantilever chair",
-    code: "Y523201",
+    code: "Code - Y523201",
     price: 42.00,
     image: "src/assets/images/image_0.png",
     
@@ -20,7 +20,7 @@ export const products: Product[] = [
   {
     id: 2,
     name: "Cantilever chair",
-    code: "Y523201",
+    code: "Code - Y523201",
     price: 42.00,
     image: "src/assets/images/image_1.png",
    
@@ -28,7 +28,7 @@ export const products: Product[] = [
   {
     id: 3,
     name: "Cantilever chair",
-    code: "Y523201",
+    code: "Code - Y523201",
     price: 42.00,
     image: "src/assets/images/image_1169.png",
    
@@ -36,7 +36,7 @@ export const products: Product[] = [
   {
     id: 4,
     name: "Cantilever chair",
-    code: "Y523201",
+    code: "Code - Y523201",
     price: 42.00,
     image: "src/assets/images/image_3.png",
     
