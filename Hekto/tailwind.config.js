@@ -29,6 +29,13 @@ export default {
         'deep-gray': '#72718F',
         'purple-main': '#7E33E0',
         'gray-deep-shade': '#E7E4F8',
+        'dark-blue': '#101750',
+        'off-gray': '#F6F5FF',
+        'green-shade-light': '#EBF4F3',
+        'new-gray': '#3F509E',
+        'blue-extra': '#111C85',
+        'light-gray': '#9295AA',
+        'gray-icon': '#535399',
     },
   }
   },

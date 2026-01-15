@@ -55,7 +55,7 @@ const Navigation = () => {
       <nav className='sticky top-0 z-50 bg-white '>
       <div className='container mx-auto px-4 '>
         {/* main navigation bar */}
-        <div className=' flex justify evenly gap-0 items-center '>
+        <div className=' flex justify between gap-0 items-center '>
           {/* hamburger and logo */}
 
           <div className="flex items-center space-x-4">
@@ -115,7 +115,7 @@ const Navigation = () => {
      
          {/* other nav links */}
           
-         {['trending', 'products', 'blog', 'shop', 'contact-us'].map((item) => (
+         {['trending', 'products', 'blog', 'shop-list', 'contact-us'].map((item) => (
               <Link
                 key={item}
                 to={`/${item}`}
@@ -201,7 +201,7 @@ const Navigation = () => {
                   ))}
                 </select>
               </div>
-              {['trending', 'products', 'blog', 'shop', 'contact-us'].map((item) => (
+              {['trending', 'products', 'blog', 'shop-list', 'contact-us'].map((item) => (
                 <Link
                   key={item}
                   to={`/${item}`}

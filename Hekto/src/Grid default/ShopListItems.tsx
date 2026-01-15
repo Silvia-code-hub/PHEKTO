@@ -16,7 +16,7 @@ export const Type:shop[]= [
         colors: ["#DE9034","#EC42A2","#8568FF"],
         price: 26.00,
         oldPrice: 52.00,
-        rating: 5,
+        rating: 4,
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo."
     },
     {
@@ -36,7 +36,7 @@ export const Type:shop[]= [
         colors: ["#DE9034","#EC42A2","#8568FF"],
         price: 26.00,
         oldPrice: 52.00,
-        rating: 5,
+        rating: 3,
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo."
     },
     {
@@ -46,7 +46,7 @@ export const Type:shop[]= [
         colors: ["#DE9034","#EC42A2","#8568FF"],
         price: 26.00,
         oldPrice: 52.00,
-        rating: 5,
+        rating: 4,
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo."
     },
     {
