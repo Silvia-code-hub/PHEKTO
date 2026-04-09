@@ -1,4 +1,4 @@
-// src/Services/cloudinaryService.ts
+
 export interface CloudinaryOptions {
     width?: number;
     height?: number;
@@ -8,16 +8,13 @@ export interface CloudinaryOptions {
     effect?: string;
 }
 
-/**
- * Get optimized Cloudinary URL with transformations
- */
 export const getOptimizedImageUrl = (
     imageUrl: string, 
     options: CloudinaryOptions = {}
 ): string => {
     if (!imageUrl) return '/placeholder.jpg';
     
-    // If it's not a Cloudinary URL, return as is or use placeholder
+
     if (!imageUrl.includes('cloudinary.com')) {
         return imageUrl;
     }
@@ -30,7 +27,7 @@ export const getOptimizedImageUrl = (
         format = 'auto'
     } = options;
     
-    // Split the URL to insert transformations
+
     const parts = imageUrl.split('/upload/');
     if (parts.length !== 2) return imageUrl;
     
@@ -45,9 +42,7 @@ export const getOptimizedImageUrl = (
     return `${parts[0]}/upload/${transformations}/${parts[1]}`;
 };
 
-/**
- * Get responsive image srcset for different screen sizes
- */
+
 export const getResponsiveImageSrcset = (
     imageUrl: string,
     sizes: number[] = [300, 500, 800, 1200]
@@ -59,9 +54,7 @@ export const getResponsiveImageSrcset = (
         .join(', ');
 };
 
-/**
- * Get blur placeholder (tiny version for lazy loading)
- */
+
 export const getBlurPlaceholder = (imageUrl: string): string => {
     if (!imageUrl.includes('cloudinary.com')) return imageUrl;
     
