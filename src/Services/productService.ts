@@ -14,9 +14,9 @@ export interface Product {
     description?: string;
     category?: string;
     quantity?: number;
-    is_featured?: boolean;
-    is_latest?: boolean;
-    is_trending?: boolean;
+    is_featured?: boolean | number;
+    is_latest?: boolean | number;
+    is_trending?: boolean | number;
     rating?: number;
     review_count?: number;
     created_at?: string;
@@ -51,17 +51,17 @@ export const getProducts = async (): Promise<Product[]> => {
 
 export const getFeaturedProducts = async (): Promise<Product[]> => {
     const products = await getProducts();
-    return products.filter(p => p.is_featured === true);
+    return products.filter(p => p.is_featured === 1 || p.is_featured === true);
 };
 
 export const getLatestProducts = async (): Promise<Product[]> => {
     const products = await getProducts();
-    return products.filter(p => p.is_latest === true);
+    return products.filter(p => p.is_latest === 1 || p.is_latest === true);
 };
 
 export const getTrendingProducts = async (): Promise<Product[]> => {
     const products = await getProducts();
-    return products.filter(p => p.is_trending === true);
+    return products.filter(p => p.is_trending === 1 || p.is_trending === true);
 };
 export const getTopCategories = async (): Promise<Category[]> => {
     const response = await api.get('/categories/top');

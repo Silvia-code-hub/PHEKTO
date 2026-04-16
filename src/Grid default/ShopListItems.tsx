@@ -11,7 +11,7 @@ export  interface shop{
 export const Type:shop[]= [
     {
         id: 1,
-        image: "src/assets/images/image_030.jpg",
+        image: "https://res.cloudinary.com/dua4go47y/image/upload/v1775565295/products/product_13.png",
         name: "Accumsan tincidunt",
         colors: ["#DE9034","#EC42A2","#8568FF"],
         price: 26.00,
@@ -21,7 +21,7 @@ export const Type:shop[]= [
     },
     {
         id: 2,
-        image: "src/assets/images/image_034.jpg",
+        image: "https://res.cloudinary.com/dua4go47y/image/upload/v1775565296/products/product_14.png",
         name: "In nulla",
         colors: ["#DE9034","#EC42A2","#8568FF"],
         price: 26.00,
@@ -31,7 +31,7 @@ export const Type:shop[]= [
     },
     {
         id: 3,
-        image: "src/assets/images/image_032.jpg",
+        image: "https://res.cloudinary.com/dua4go47y/image/upload/v1775565295/products/product_15.png",
         name: "Vel sem",
         colors: ["#DE9034","#EC42A2","#8568FF"],
         price: 26.00,
@@ -41,7 +41,7 @@ export const Type:shop[]= [
     },
     {
         id: 4,
-        image: "src/assets/images/image_036.jpg",
+        image: "https://res.cloudinary.com/dua4go47y/image/upload/v1775565295/products/product_16.png",
         name: "Porttitor cum",
         colors: ["#DE9034","#EC42A2","#8568FF"],
         price: 26.00,
@@ -51,7 +51,7 @@ export const Type:shop[]= [
     },
     {
         id: 5,
-        image: "src/assets/images/image_031.jpg",
+        image: "https://res.cloudinary.com/dua4go47y/image/upload/v1775565295/products/product_17.png",
         name: "Nunc in",
         colors: ["#DE9034","#EC42A2","#8568FF"],
         price: 26.00,
@@ -61,7 +61,7 @@ export const Type:shop[]= [
     },
     {
         id: 6,
-        image: "src/assets/images/image_035.jpg",
+        image: "https://res.cloudinary.com/dua4go47y/image/upload/v1775565295/products/product_18.png",
         name: "Vitae facilisis",
         colors: ["#DE9034","#EC42A2","#8568FF"],
         price: 26.00,
@@ -71,7 +71,7 @@ export const Type:shop[]= [
     },
     {
         id: 7,
-        image: "src/assets/images/image_033.jpg",
+        image: "https://res.cloudinary.com/dua4go47y/image/upload/v1775565295/products/product_19.png",
         name: "Curabitur lectus",
         colors: ["#DE9034","#EC42A2","#8568FF"],
         price: 26.00,

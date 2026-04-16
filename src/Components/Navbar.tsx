@@ -41,10 +41,10 @@ const Navigation = () => {
   return (
     <nav className='sticky top-0 z-50 bg-white shadow-sm'>
       <div className='container mx-auto px-4'>
-        {/* Main Navigation Bar */}
+        
         <div className='flex justify-between items-center'>
           
-          {/* Left Section: Hamburger & Logo */}
+        
           <div className="flex items-center space-x-4">
             <button
               onClick={toggleMobileMenu}
@@ -62,10 +62,10 @@ const Navigation = () => {
             </h1>
           </div>
 
-          {/* Desktop Navigation Links */}
+          
           <div className='hidden lg:flex items-center gap-6'>
             
-            {/* Home Dropdown */}
+           
             <div 
               className='relative'
               onMouseEnter={() => setIsDropdownOpen(true)}
@@ -76,7 +76,7 @@ const Navigation = () => {
                 onChange={(e) => navigate(e.target.value)}
                 className='absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10'
               >
-                <option value="/" className="text-black">Home</option>
+                <option value="/" className="text-black">Home </option>
                 {menuItems.map((item) => (
                   <option key={item.id} value={item.path} className="text-black">
                     {item.label}

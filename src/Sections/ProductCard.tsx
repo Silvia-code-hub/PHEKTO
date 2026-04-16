@@ -8,7 +8,9 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const [imageLoaded, setImageLoaded] = React.useState(false);
   const formatPrice = (price: any):string => {
+    
     if (price === null || price ===undefined) return '0.00';
 
     const numPrice = typeof price ==='string' ? parseFloat(price) : price;
@@ -16,12 +18,17 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     return numPrice.toFixed(2);
   };
 
-  const imageUrl = getImageUrl(product.image_url);
+  const imageUrl = getImageUrl(product.image_url, 270, 236);
 
   return (
    
     <div className="w-[270px] h-[361px] group">
       <div className="w-[270px] h-[236px] bg-cream-white relative overflow-hidden">
+        {!imageLoaded && (
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-100 z-10">
+            <div className="w-8 h-8 border-2 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
+          </div>
+        )}
       <div className="flex mb-3 pt-2 pl-3 opacity-0 hover:opacity-100"> 
        <span className="bg-white rounded-full p-2 shadow-md hover:text-white transition-colors duration-300 cursor-pointer"><FaShoppingCart className='text-purple hover:text-white text-base'/></span>
        <span className="bg-white ml-2 rounded-full p-2 shadow-md  hover:text-white transition-colors duration-300 cursor-pointer"><FaRegHeart className='text-pink-500 hover:text-white text-base'/></span>
@@ -30,7 +37,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
       </div>
       <div className="w-[130px] h-[150px] ml-20 ">
-        <img src={imageUrl} alt={product.name}  onError={(e) => {(e.target as HTMLImageElement).src = '/placeholder.jpg';  }}/>
+        
+        <img src={imageUrl} alt={product.name} className={`w-full h-full object-contain transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+            onLoad={() => setImageLoaded(true)}  onError={(e) => {(e.target as HTMLImageElement).src = '/placeholder.jpg'; setImageLoaded(true);  }}/>
         <span className="opacity-0">{product.product_id}</span>
       </div>
       <button className="bg-light-green text-white w-[94px] h-[29px] font-medium text-xs leading-[1.00] ml-20 opacity-0 hover:opacity-100 transition-opacity">View Details</button>

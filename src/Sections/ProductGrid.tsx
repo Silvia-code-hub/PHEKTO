@@ -18,7 +18,7 @@ const ProductGrid: React.FC = () => {
         const fetchProducts = async () => {
             try {
                 setLoading(true);
-                
+                console.log('Calling getFeaturedProducts...');
                 const data = await getFeaturedProducts();
                 console.log(' Featured products received:', data);
                 console.log(' Number of products:', data.length);
