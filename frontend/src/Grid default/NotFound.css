@@ -1,0 +1,27 @@
+.not-found-page{
+    background-color: #fff;
+}
+.top{
+    height: 286px;
+    background-color: #F6F5FF;
+}
+.bottom-section{
+    width: 913px;
+    height: 677px;
+}
+.page-info1{
+    width: 456px;
+    height: 24px;
+    font-weight: 700;
+    color:#152970 ;
+    font-size: 24px;
+    text-align: center;
+
+}
+.back-btn{
+    width: 165px;
+    height: 44px;
+    background-color: #FB2E86;
+    color: #fff;
+}
+

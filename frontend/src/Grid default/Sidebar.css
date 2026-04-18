@@ -1,0 +1,81 @@
+.side-bar-info{
+    align-items: end;
+    width: 300px;
+    justify-content: left;
+    margin-left: 5px;
+    visibility: visible;
+    opacity: 1;
+    display: block;
+    color: black;
+    font-size: 14px;
+}
+.section-content{
+    margin-right: 80px;
+    align-items: flex-start;
+    justify-content: left;
+    font-size: 14px;
+}
+
+ .star-filled {
+  color: #FFC416;
+}
+
+.star-empty {
+  color: #e2e8f0;
+
+}
+.checkbox-item{
+    margin-top: -20px;
+   
+}
+
+.side-heading{
+    text-decoration: underline;
+}
+
+.brands-section{
+    display: flex;
+    flex-direction: column;
+}
+.main-content-layout{
+    display: flex;
+    gap: 20px;
+}
+.third-container{
+    width: 921px;
+    height: 230px;
+    background-color: #fff;
+}
+.p-2{
+    display: flex;
+}
+.sidebar-product-rating{
+    margin-top: -5px;
+
+}
+.p-3{
+    margin-top: 20px;
+    margin-left: -310px;
+    text-align: left;
+    align-content: end;
+
+}
+.sidebar-icons{
+    opacity: 1;
+    display: flex;
+    gap: 40px;
+    color: #535399;
+    margin-top: 85px;
+    margin-left: -530px;
+}
+.toggle-icon {
+  font-weight: bold;
+  font-size: 18px;
+  color: #666;
+}
+.section-content{
+    display: flex;
+    flex-direction: column;
+    margin-left: 2px;
+    
+}

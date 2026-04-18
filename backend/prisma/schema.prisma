@@ -1,0 +1,236 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+
+  
+}
+
+model addresses {
+  address_id    Int                     @id @default(autoincrement())
+  user_id       Int
+  address_type  addresses_address_type? @default(both)
+  full_name     String                  @db.VarChar(100)
+  phone         String?                 @db.VarChar(20)
+  address_line1 String                  @db.VarChar(255)
+  address_line2 String?                 @db.VarChar(255)
+  city          String                  @db.VarChar(100)
+  state         String                  @db.VarChar(100)
+  country       String?                 @default("Kenya") @db.VarChar(100)
+  postal_code   String                  @db.VarChar(20)
+  is_default    Boolean?                @default(false)
+  created_at    DateTime                @db.DateTime(0)
+  updated_at    DateTime                @db.DateTime(0)
+  users         users                   @relation(fields: [user_id], references: [user_id], onDelete: Cascade, map: "addresses_ibfk_1")
+
+  @@index([user_id], map: "user_id")
+}
+
+model cart_items {
+  cart_item_id Int      @id @default(autoincrement())
+  cart_id      Int
+  product_id   Int
+  quantity     Int?     @default(1)
+  created_at   DateTime @db.DateTime(0)
+  updated_at   DateTime @db.DateTime(0)
+  carts        carts    @relation(fields: [cart_id], references: [cart_id], onDelete: Cascade, map: "cart_items_ibfk_11")
+  products     products @relation(fields: [product_id], references: [product_id], onDelete: Cascade, map: "cart_items_ibfk_12")
+
+  @@unique([cart_id, product_id], map: "unique_cart_product")
+  @@index([product_id], map: "product_id")
+}
+
+model carts {
+  cart_id    Int          @id @default(autoincrement())
+  user_id    Int
+  created_at DateTime     @db.DateTime(0)
+  updated_at DateTime     @db.DateTime(0)
+  cart_items cart_items[]
+  users      users        @relation(fields: [user_id], references: [user_id], onDelete: Cascade, map: "carts_ibfk_1")
+
+  @@index([user_id], map: "user_id")
+}
+
+model categories {
+  category_id        Int          @id @default(autoincrement())
+  category_name      String       @unique(map: "category_name") @db.VarChar(100)
+  category_slug      String       @unique(map: "category_slug") @db.VarChar(100)
+  description        String?      @db.Text
+  parent_category_id Int?
+  created_at         DateTime?    @default(now()) @db.Timestamp(0)
+  updated_at         DateTime?    @default(now()) @db.Timestamp(0)
+  categories         categories?  @relation("categoriesTocategories", fields: [parent_category_id], references: [category_id], onUpdate: NoAction, map: "categories_ibfk_1")
+  other_categories   categories[] @relation("categoriesTocategories")
+
+  @@index([category_slug], map: "idx_category_slug")
+  @@index([parent_category_id], map: "parent_category_id")
+}
+
+model order_items {
+  order_item_id Int      @id @default(autoincrement())
+  order_id      Int
+  product_id    Int
+  product_name  String   @db.VarChar(200)
+  product_price Decimal  @db.Decimal(10, 2)
+  quantity      Int
+  subtotal      Decimal  @db.Decimal(10, 2)
+  orders        orders   @relation(fields: [order_id], references: [order_id], onDelete: Cascade, map: "order_items_ibfk_13")
+  products      products @relation(fields: [product_id], references: [product_id], onDelete: Cascade, map: "order_items_ibfk_14")
+
+  @@index([order_id], map: "order_id")
+  @@index([product_id], map: "product_id")
+}
+
+model orders {
+  order_id          Int                    @id @default(autoincrement())
+  user_id           Int
+  order_number      String                 @unique(map: "order_number") @db.VarChar(50)
+  status            orders_status?         @default(pending)
+  total_amount      Decimal                @db.Decimal(10, 2)
+  payment_method    String?                @db.VarChar(50)
+  payment_status    orders_payment_status? @default(pending)
+  created_at        DateTime               @db.DateTime(0)
+  shipping_adddress String?                @db.Text
+  updated_at        DateTime               @db.DateTime(0)
+  order_items       order_items[]
+  users             users                  @relation(fields: [user_id], references: [user_id], onDelete: Cascade, map: "orders_ibfk_1")
+  payments          payments[]
+
+  @@index([user_id], map: "user_id")
+}
+
+model payments {
+  payment_id      Int              @id @default(autoincrement())
+  order_id        Int
+  payment_method  String           @db.VarChar(50)
+  transaction_id  String?          @unique(map: "transaction_id") @db.VarChar(100)
+  amount          Decimal          @db.Decimal(10, 2)
+  currency        String?          @default("KES") @db.VarChar(10)
+  status          payments_status? @default(pending)
+  payment_details Json?
+  created_at      DateTime?        @default(now()) @db.Timestamp(0)
+  updated_at      DateTime?        @default(now()) @db.Timestamp(0)
+  orders          orders           @relation(fields: [order_id], references: [order_id], onDelete: Cascade, onUpdate: NoAction, map: "payments_ibfk_1")
+
+  @@index([order_id, status], map: "idx_order_payment")
+  @@index([transaction_id], map: "idx_transaction_id")
+}
+
+model products {
+  product_id  Int           @id @default(autoincrement())
+  sku         String        @unique(map: "sku") @db.VarChar(50)
+  description String?       @db.Text
+  price       Decimal       @db.Decimal(10, 2)
+  created_at  DateTime      @db.DateTime(0)
+  old_price   Decimal?      @db.Decimal(10, 2)
+  quantity    Int?          @default(0)
+  image_url   String?       @db.VarChar(500)
+  updated_at  DateTime      @db.DateTime(0)
+  name        String        @db.VarChar(200)
+  category    String?       @db.VarChar(100)
+  cart_items  cart_items[]
+  order_items order_items[]
+  wishlists   wishlists[]
+
+  @@index([price], map: "idx_price")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model reviews {
+  review_id   Int       @id @default(autoincrement())
+  product_id  Int
+  user_id     Int
+  rating      Int       @db.TinyInt
+  title       String?   @db.VarChar(200)
+  comment     String?   @db.Text
+  is_approved Boolean?  @default(false)
+  created_at  DateTime? @default(now()) @db.Timestamp(0)
+  updated_at  DateTime? @default(now()) @db.Timestamp(0)
+  users       users     @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction, map: "reviews_ibfk_1")
+
+  @@unique([user_id, product_id], map: "unique_user_product")
+  @@index([product_id, rating], map: "idx_product_rating")
+  @@index([user_id], map: "idx_user_reviews")
+}
+
+model users {
+  user_id        Int                   @id @default(autoincrement())
+  username       String                @unique(map: "username") @db.VarChar(30)
+  email          String                @unique(map: "email") @db.VarChar(100)
+  first_name     String?               @db.VarChar(50)
+  last_name      String?               @db.VarChar(50)
+  password_hash  String                @unique(map: "password_hash") @db.VarChar(255)
+  phone          String?               @db.VarChar(20)
+  created_at     DateTime              @db.DateTime(0)
+  updated_at     DateTime              @db.DateTime(0)
+  last_login     DateTime?             @db.DateTime(0)
+  email_verified Boolean?              @default(false)
+  account_status users_account_status? @default(active)
+  user_type      users_user_type?      @default(customer)
+  addresses      addresses[]
+  carts          carts[]
+  orders         orders[]
+  reviews        reviews[]
+  wishlists      wishlists[]
+
+  @@index([account_status], map: "idx_account_status")
+  @@index([email], map: "idx_email")
+  @@index([email_verified], map: "idx_email_verified")
+  @@index([username], map: "idx_username")
+}
+
+model wishlists {
+  wishlist_id Int       @id @default(autoincrement())
+  user_id     Int
+  product_id  Int
+  added_at    DateTime? @default(now()) @db.Timestamp(0)
+  users       users     @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction, map: "wishlists_ibfk_1")
+  products    products  @relation(fields: [product_id], references: [product_id], onDelete: Cascade, onUpdate: NoAction, map: "wishlists_ibfk_2")
+
+  @@unique([user_id, product_id], map: "unique_user_product")
+  @@index([user_id], map: "idx_user_wishlist")
+  @@index([product_id], map: "product_id")
+}
+
+enum addresses_address_type {
+  billing
+  shipping
+  both
+}
+
+enum orders_status {
+  pending
+  processing
+  shipped
+  delivered
+  cancelled
+}
+
+enum orders_payment_status {
+  pending
+  paid
+  failed
+}
+
+enum payments_status {
+  pending
+  completed
+  failed
+  refunded
+}
+
+enum users_account_status {
+  active
+  inactive
+  suspended
+  banned
+}
+
+enum users_user_type {
+  customer
+  admin
+  vendor
+}
