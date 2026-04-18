@@ -1,5 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./Components/ProtectedRoute";
+
 import HomePage from "./Pages/HomePage";
+import VerifyEmail from './Pages/VerifyEmail';
+import Login from "./Pages/Login";
+import Register from "./Pages/Register";
 
 import ProductsPage from "./Pages/ProductsPage";
 import TrendingPage from "./Pages/TrendingPage";
@@ -26,10 +32,18 @@ import SingleBlog from "./Grid default/SingleBlog";
 const AppRouter = () => {
     return(
         <Router>
-            <Routes>
-                <Route path="/" element={<HomePage/>}/>
-                <Route path="/products" element={<ProductsPage/>}/>
-                <Route path="/trending" element={<TrendingPage/>}/>
+            <AuthProvider>
+                <Routes>
+                    <Route path="/verify-email" element={<VerifyEmail />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+
+                    <Route path="/" element={
+                        
+                        <HomePage/>}/>
+
+                    <Route path="/products" element={<ProductsPage/>}/>
+                    <Route path="/trending" element={<TrendingPage/>}/>
                 <Route path="/blog" element={<BlogPage/>}/>
                 <Route path="/shop-list" element={<ShopList/>}/>
                 <Route path="/grid" element={<Default />}/>
@@ -52,6 +66,7 @@ const AppRouter = () => {
 
                 
             </Routes>
+            </AuthProvider>
         </Router>
     )
 }
