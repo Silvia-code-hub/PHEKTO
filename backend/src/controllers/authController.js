@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const { sendVerificationEmail } = require('../Services/emailService');
+const passport = require('passport');
 
 const generateTokens = async (user) => {
     const accessToken = jwt.sign(
@@ -259,7 +260,34 @@ const authController = {
                 error: 'Logout failed'
             });
         }
-    }
+    },
+
+   googleLogin: (req, res) => {
+    console.log('Google login initiated');
+    passport.authenticate('google', { scope: ['profile', 'email'] })(req, res);
+  },
+
+    googleCallback: (req, res) => {
+         console.log('Google callback received');
+    passport.authenticate('google', { session: false }, async (err, user) => {
+        if (err || !user) {
+            return res.redirect(`${process.env.FRONTEND_URL}/login?error=google_auth_failed`);
+        }
+        try{
+
+        const { accessToken, refreshToken } = await generateTokens(user);
+         console.log('Tokens generated successfully');
+
+        return res.redirect(
+            `${process.env.FRONTEND_URL}/auth/callback?accessToken=${accessToken}&refreshToken=${refreshToken}`
+        );
+    } catch (tokenError) {
+            console.error('Token generation error:', tokenError);
+            return res.redirect(`${process.env.FRONTEND_URL}/login?error=token_generation_failed`);
+        }
+
+    })(req, res);
+}
 };
 
 module.exports = authController;

@@ -2,10 +2,15 @@ const express = require('express')
 const cloudinary = require('cloudinary').v2;
 const cors = require('cors');
 const path = require('path');
+const session = require('express-session');
 require('dotenv').config();
 
 
-const db = require('./src/config/database');  
+
+const db = require('./src/config/database'); 
+const passport = require('./src/config/passport');
+console.log('Passport loaded:', !!passport);
+
 
 
 cloudinary.config({
@@ -35,6 +40,15 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));  
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
+app.use(session({
+    secret: process.env.SESSION_SECRET || 'your_session_secret',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false } 
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 
