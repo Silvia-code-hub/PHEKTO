@@ -10,10 +10,7 @@ interface LayoutProps {
         return(
             <div>
                <nav className="navigations">
-                <Link to="/">Home</Link>
-                <Link to="/products">Products</Link>
-                <Link to="/trending">Trending</Link>
-                <Link to="/blog">Blog</Link>
+               
                </nav>
                 <Header/>
                 <Navigation/>

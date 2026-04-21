@@ -4,6 +4,34 @@ const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const { sendVerificationEmail } = require('../Services/emailService');
 
+const generateTokens = async (user) => {
+    const accessToken = jwt.sign(
+        {id: user.user_id, email: user.email, user_type: user.user_type },
+        process.env.JWT_SECRET,
+        { expiresIn: '15m' }
+    );
+
+     const refreshToken = jwt.sign(
+        { id: user.user_id },
+        process.env.REFRESH_SECRET,
+        { expiresIn: '7d' }  
+    );
+
+    const expiresAt = new Date();
+    expiresAt.setDate(expiresAt.getDate() + 7); 
+    
+    await db.insert(
+        `INSERT INTO refresh_tokens (user_id, token, expires_at) VALUES (?, ?, ?)`,
+        [user.user_id, refreshToken, expiresAt]
+    );
+    
+    return { accessToken, refreshToken };
+}
+
+
+
+
+
 const authController = {
     register: async (req, res) => {
         try{
@@ -81,7 +109,7 @@ const authController = {
 
             res.json({
                 success: true,
-                message: 'Email verified successfully! You can nom log in.'
+                message: 'Email verified successfully! You can now log in.'
             });
         } catch (error) {
             console.error('Verification error:', error);
@@ -123,18 +151,15 @@ const authController = {
                 });
             }
             
-            const token = jwt.sign(
-                { id: user.user_id, email: user.email, user_type: user.user_type },
-                                process.env.JWT_SECRET,
-                { expiresIn: '24h' }
-            );
+            const { accessToken, refreshToken } = await generateTokens(user);
             
             const { password_hash, ...userWithoutPassword } = user;
             
             res.json({
                 success: true,
                 message: 'Login successful',
-                token: token,
+                accessToken: accessToken,
+                refreshToken: refreshToken,
                 data: userWithoutPassword
             });
             
@@ -143,6 +168,95 @@ const authController = {
             res.status(500).json({
                 success: false,
                 error: 'Login failed'
+            });
+        }
+    },
+
+    refreshToken: async (req, res) => {
+        try{
+           const { refreshToken } = req.body;
+           
+           if (!refreshToken) {
+             return res.status(401).json({
+                success: false,
+                error: 'Refresh token required'
+             });
+           }
+           let decoded;
+           try{
+            decoded = jwt.verify(refreshToken, process.env.REFRESH_SECRET);
+           } catch (error) {
+            return res.status(401).json({
+                success: false,
+                error: 'Invalid or expired refresh token'
+            });
+           }
+
+            const storedToken = await db.getOne(
+                `SELECT * FROM refresh_tokens 
+                 WHERE token = ? AND revoked = FALSE AND expires_at > NOW()`,
+                [refreshToken]
+            );
+            
+            if (!storedToken) {
+                return res.status(401).json({
+                    success: false,
+                    error: 'Refresh token not found or revoked'
+                });
+            }
+
+            const user = await db.getOne(
+                'SELECT * FROM users WHERE user_id = ?',
+                [decoded.id]
+            );
+            
+            if (!user) {
+                return res.status(401).json({
+                    success: false,
+                    error: 'User not found'
+                });
+            }
+             const newAccessToken = jwt.sign(
+                { id: user.user_id, email: user.email, user_type: user.user_type },
+                process.env.JWT_SECRET,
+                { expiresIn: '15m' }
+            );
+            
+            res.json({
+                success: true,
+                accessToken: newAccessToken
+            });
+            
+        } catch (error) {
+            console.error('Refresh token error:', error);
+            res.status(500).json({
+                success: false,
+                error: 'Failed to refresh token'
+            });
+            
+        }
+    },
+
+    logout: async (req, res) => {
+        try{
+            const { refreshToken } = req.body;
+
+            if (refreshToken) {
+                await db.update(
+                    `UPDATE refresh_tokens SET revoked = TRUE WHERE token = ?`,
+                    [refreshToken]
+                );
+
+            }
+            res.json({
+                success: true,
+                message: 'Logged out successfully'
+            });
+        } catch (error) {
+            console.error('Logout error:', error);
+            res.status(500).json({
+                success: false,
+                error: 'Logout failed'
             });
         }
     }

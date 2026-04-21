@@ -2,6 +2,7 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 import api from '../Services/api';
 
 interface User {
+    phone: any;
     user_id: number;
     username: string;
     email: string;
@@ -12,7 +13,7 @@ interface User {
 
 interface AuthContextType {
     user: User | null;
-    token: string | null;
+    accessToken: string | null;
     login: (email: string, password: string) => Promise<void>;
     register: (userData: any) => Promise<void>;
     logout: () => void;
@@ -23,36 +24,80 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     
-    const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
-   
+    const [accessToken, setAccessToken] = useState<string | null>(localStorage.getItem('accessToken'));
+    const [refreshToken, setRefreshToken] = useState<string | null>(localStorage.getItem('refreshToken'));
     const [user, setUser] = useState<User | null>(null);
     const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
-        if (token) {
+     const refreshAccessToken = async () => {
+        const storedRefreshToken = localStorage.getItem('refreshToken');
+        if (!storedRefreshToken) return false;
+        
+        try {
+            const response = await api.post('/auth/refresh-token', { refreshToken: storedRefreshToken });
+            const { accessToken: newAccessToken } = response.data;
             
-            api.get('/users/me')
-                .then((response) => {
-                    setUser(response.data.data); 
-                })
-                .catch((error) => {
-                    console.error('Failed to fetch user:', error);
-                    localStorage.removeItem('token');
-                    setToken(null);
-                })
-                .finally(() => setIsLoading(false));
-        } else {
-            setIsLoading(false);
+            localStorage.setItem('accessToken', newAccessToken);
+            setAccessToken(newAccessToken);
+            return true;
+        } catch (error) {
+            console.error('Failed to refresh token:', error);
+            return false;
         }
-    }, [token]);
+    };
+
+
+     useEffect(() => {
+        const fetchUser = async () => {
+            if (!accessToken) {
+                setIsLoading(false);
+                return;
+            }
+            
+            try {
+                const response = await api.get('/users/me');
+                setUser(response.data.data);
+            } catch (error: any) {
+                
+                if (error.response?.status === 401) {
+                    const refreshed = await refreshAccessToken();
+                    if (refreshed) {
+                        
+                        try {
+                            const response = await api.get('/users/me');
+                            setUser(response.data.data);
+                        } catch (err) {
+                            console.error('Still failed after refresh:', err);
+                            localStorage.removeItem('accessToken');
+                            localStorage.removeItem('refreshToken');
+                            setAccessToken(null);
+                        }
+                    } else {
+                        localStorage.removeItem('accessToken');
+                        localStorage.removeItem('refreshToken');
+                        setAccessToken(null);
+                    }
+                } else {
+                    console.error('Failed to fetch user:', error);
+                }
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        
+        fetchUser();
+    }, [accessToken]);
 
     const login = async (email: string, password: string) => {
         try {
-            const response = await api.post('/users/login', { email, password });
-            const { token: newToken, data: userData } = response.data;
+            const response = await api.post('/auth/login', { email, password });
+            console.log('Login response:', response.data);
+            const { accessToken: newAccessToken, refreshToken: newRefreshToken, data: userData } = response.data;
             
-            localStorage.setItem('token', newToken);
-            setToken(newToken);
+            localStorage.setItem('accessToken', newAccessToken);
+            localStorage.setItem('refreshToken', newRefreshToken);
+            setAccessToken(newAccessToken);
+            setRefreshToken(newRefreshToken);
             setUser(userData);
         } catch (error) {
             console.error('Login error:', error);
@@ -62,22 +107,50 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     const register = async (userData: any) => {
         try {
-            const response = await api.post('/users', userData);
-            await login(userData.email, userData.password);
+         const response = await api.post('/auth/register', userData);
+          return response.data;
+          
         } catch (error) {
             console.error('Registration error:', error);
             throw error;
         }
     };
 
-    const logout = () => {
-        localStorage.removeItem('token');
-        setToken(null);
+    const logout = async () => {
+        const storedRefreshToken = localStorage.getItem('refreshToken');
+        if (storedRefreshToken) {
+            try {
+                await api.post('/auth/logout', { refreshToken: storedRefreshToken });
+            } catch (error) {
+                console.error('Logout API error:', error);
+            }
+        }
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        setAccessToken(null);
+        setRefreshToken(null);
         setUser(null);
     };
 
+    useEffect(() => {
+        const interceptor = api.interceptors.request.use(
+            (config) => {
+                const token = localStorage.getItem('accessToken');
+                if (token) {
+                    config.headers.Authorization = `Bearer ${token}`;
+                }
+                return config;
+            },
+            (error) => Promise.reject(error)
+        );
+        
+        return () => {
+            api.interceptors.request.eject(interceptor);
+        };
+    }, []);
+
     return (
-        <AuthContext.Provider value={{ user, token, login, register, logout, isLoading }}>
+        <AuthContext.Provider value={{ user, accessToken, login, register, logout, isLoading }}>
             {children}
         </AuthContext.Provider>
     );
