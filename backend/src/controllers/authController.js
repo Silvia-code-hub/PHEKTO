@@ -2,8 +2,9 @@ const db = require('../config/database');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
-const { sendVerificationEmail } = require('../Services/emailService');
+const { sendVerificationEmail, sendPasswordResetEmail } = require('../Services/emailService');
 const passport = require('passport');
+const { cachedDataVersionTag } = require('v8');
 
 const generateTokens = async (user) => {
     const accessToken = jwt.sign(
@@ -120,6 +121,7 @@ const authController = {
             });
         }
     },
+
     login: async (req, res) => {
         try {
             const { email, password } = req.body;
@@ -287,7 +289,104 @@ const authController = {
         }
 
     })(req, res);
+},
+
+forgotPassword: async (req, res) => {
+    try{
+        const { email} = req.body;
+
+        if (!email) {
+            return res.status(400).json({
+                success: false,
+                error: 'Email is required'
+
+            });
+        }
+        const user = await db.getOne(
+            'SELECT user_id, email FROM users WHERE email = ?', [email]
+        );
+
+        if (!user) {
+            return res.json({
+                success: true,
+                message: 'If your email is registered, you will receive a reset link.'
+            });
+        }
+
+        const resetToken = crypto.randomBytes(32).toString('hex');
+        const resetExpires = new Date();
+        resetExpires.setHours(resetExpires.getHours() + 1);
+
+        await db.update(
+            `UPDATE users SET reset_token = ?, reset_expires = ? WHERE user_id = ?`,
+            [resetToken, resetExpires, user.user_id]
+        );
+
+        await sendPasswordResetEmail(email, resetToken);
+
+        res.json({
+            success: true,
+            message: 'If your email is registered, you will receive a reset link.'
+        });
+    } catch (error) {
+        console.error('Forgot password error:', error);
+        res.status(500).json({
+            success: false,
+            error: 'Failed to process request'
+        });
+    }
+},
+resetPassword: async (req, res) => {
+    try{
+        const{ token, newPassword } = req.body;
+
+        if (!token || !newPassword) {
+            return res.status(400).json({
+                success: false,
+                error: 'Token and new password are required'
+            });
+        }
+        if (newPassword.length < 6) {
+            return res.status(400).json({
+                success: false,
+                error: 'Password must be at least 6 characters long'
+            });
+        }
+        const user = await db.getOne(
+            `SELECT user_id, email FROM users WHERE reset_token = ? AND reset_expires > NOW()`, [token]
+        );
+
+        if (!user) {
+            return res.status(400).json({
+                success: false,
+                error: 'Invalid or expired reset token'
+            });
+        }
+         const saltRounds = 10;
+         const newPasswordHash = await bcrypt.hash(newPassword, saltRounds);
+
+         await db.update(
+            `UPDATE users SET password_hash = ?, reset_token = NULL, reset_expires = NULL, is_verified = TRUE WHERE user_id = ?`, [newPasswordHash, user.user_id]
+         );
+
+          await db.update(
+            `UPDATE refresh_tokens SET revoked = TRUE WHERE user_id = ?`,
+            [user.user_id]
+        );
+
+         res.json({
+            success: true,
+            message: 'Password reset successfully! You can now log in with your new password.'
+        });
+    } catch (error) {
+        console.error('Reset password error:', error);
+        res.status(500).json({
+            success: false,
+            error: 'Failed to reset password'
+        });
+    }
 }
+
 };
 
 module.exports = authController;

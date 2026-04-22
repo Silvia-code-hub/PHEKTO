@@ -6,6 +6,8 @@ import HomePage from "./Pages/HomePage";
 import VerifyEmail from './Pages/VerifyEmail';
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
+import ForgotPassword from './Pages/ForgotPassword';
+import ResetPassword from './Pages/ResetPassword';
 
 import ProductsPage from "./Pages/ProductsPage";
 import TrendingPage from "./Pages/TrendingPage";
@@ -37,26 +39,26 @@ const AppRouter = () => {
                     <Route path="/verify-email" element={<VerifyEmail />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
+                    <Route path="/forgot-password" element={<ForgotPassword />} />
+                    <Route path="/reset-password" element={<ResetPassword />} />
 
-                    <Route path="/" element={
-                        
-                        <HomePage/>}/>
 
-                    <Route path="/products" element={<ProductsPage/>}/>
-                    <Route path="/trending" element={<TrendingPage/>}/>
-                <Route path="/blog" element={<BlogPage/>}/>
-                <Route path="/shop-list" element={<ShopList/>}/>
-                <Route path="/grid" element={<Default />}/>
-                <Route path="/about-us" element={<AboutUs/>}/>
-                <Route path="/contact-us" element={<ContactUs/>}/>
-                <Route path="/faq" element={<Faq/>}/>   
-                <Route path="/hekto-demo" element={<HektoDemo/>}/>
-                <Route path="/my-account" element={<MyAcc/>}/>
-                <Route path="/order-complete" element={<OrderComplete/>}/>
-                <Route path="/product-details" element={<ProductDetails/>}/>
-                <Route path="/shopping-cart" element={<ShoppingCart/>}/>
-                <Route path="/side-bar" element={<Sidebar/>}/>
-                <Route path="/single-blog" element={<SingleBlog/>}/>
+                    <Route path="/" element={<ProtectedRoute><HomePage/></ProtectedRoute>}/>
+                    <Route path="/products" element={<ProtectedRoute><ProductsPage/></ProtectedRoute>}/>
+                    <Route path="/trending" element={<ProtectedRoute><TrendingPage/></ProtectedRoute>}/>
+                    <Route path="/blog" element={<ProtectedRoute><BlogPage/></ProtectedRoute>}/>
+                    <Route path="/shop-list" element={<ProtectedRoute><ShopList/></ProtectedRoute>}/>
+                    <Route path="/grid" element={<ProtectedRoute><Default /></ProtectedRoute>}/>
+                    <Route path="/about-us" element={<ProtectedRoute><AboutUs/></ProtectedRoute>}/>
+                    <Route path="/contact-us" element={<ProtectedRoute><ContactUs/></ProtectedRoute>}/>
+                    <Route path="/faq" element={<ProtectedRoute><Faq/></ProtectedRoute>}/>   
+                    <Route path="/hekto-demo" element={<ProtectedRoute><HektoDemo/></ProtectedRoute>}/>
+                    <Route path="/my-account" element={<ProtectedRoute><MyAcc/></ProtectedRoute>}/>
+                    <Route path="/order-complete" element={<ProtectedRoute><OrderComplete/></ProtectedRoute>}/>
+                    <Route path="/product-details" element={<ProtectedRoute><ProductDetails/></ProtectedRoute>}/>
+                    <Route path="/shopping-cart" element={<ProtectedRoute><ShoppingCart/></ProtectedRoute>}/>
+                    <Route path="/side-bar" element={<ProtectedRoute><Sidebar/></ProtectedRoute>}/>
+                    <Route path="/single-blog" element={<ProtectedRoute><SingleBlog/></ProtectedRoute>}/>
 
                  <Route path="*" element={<NotFound/>}/>
 

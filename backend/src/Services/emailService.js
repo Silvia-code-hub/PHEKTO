@@ -35,4 +35,24 @@ const sendVerificationEmail = async (email, token) => {
      console.log('Email sent successfully!');
 };
 
-module.exports = { sendVerificationEmail };
+const sendPasswordResetEmail = async (email, token) => {
+    const resetUrl = `${process.env.FRONTEND_URL}/reset-password?token=${token}`;
+    
+    await transporter.sendMail({
+        from: `"My Hekto" <${process.env.EMAIL_USER}>`,
+        to: email,
+        subject: 'Reset Your Password - Hekto',
+        html: `
+            <div style="font-family: Arial, sans-serif; max-width: 600px;">
+                <h2>Reset Your Password</h2>
+                <p>You requested to reset your password. Click the link below to create a new password:</p>
+                <a href="${resetUrl}" style="background:#ec489a; color:white; padding:10px 20px; text-decoration:none; border-radius:5px;">Reset Password</a>
+                <p>Or copy this link: ${resetUrl}</p>
+                <p>This link expires in 1 hour.</p>
+                <p>If you didn't request this, please ignore this email.</p>
+            </div>
+        `
+    });
+};
+
+module.exports = { sendVerificationEmail, sendPasswordResetEmail };
