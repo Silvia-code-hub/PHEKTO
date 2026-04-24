@@ -12,7 +12,7 @@ const Navigation = () => {
   const handleSearch = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(searchQuery);
-    // Add your search logic here
+    
   };
 
   const toggleMobileMenu = () => {
@@ -74,11 +74,11 @@ const Navigation = () => {
               <select
                 value={location.pathname}
                 onChange={(e) => navigate(e.target.value)}
-                className='absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10'
+                className='absolute appearance-none inset-0 w-full h-full opacity-0 cursor-pointer z-10'
               >
-                <option value="/" className="text-black">Home </option>
+                <option value="/" className="text-black appearance-none">Home </option>
                 {menuItems.map((item) => (
-                  <option key={item.id} value={item.path} className="text-black">
+                  <option key={item.id} value={item.path} className="text-black appearance-none">
                     {item.label}
                   </option>
                 ))}
@@ -89,14 +89,14 @@ const Navigation = () => {
                 cursor-pointer border border-transparent hover:border-gray-300
                 transition-colors duration-200
               `}>
-                <span className="font-normal text-base">Home</span>
+                <span className="font-normal text-base "> <Link to="/"> Home </Link> </span>
                 <span className="text-xs">
                   {isDropdownOpen ? <FaChevronUp /> : <FaChevronDown />}
                 </span>
               </div>
             </div>
 
-            {/* Trending Link */}
+           
             <Link
               to="/trending"
               className={`font-normal text-base px-3 py-2 rounded-md transition-colors duration-200 ${
@@ -106,7 +106,8 @@ const Navigation = () => {
               Trending
             </Link>
 
-            {/* Products Link */}
+            
+              
             <Link
               to="/products"
               className={`font-normal text-base px-3 py-2 rounded-md transition-colors duration-200 ${
@@ -116,7 +117,7 @@ const Navigation = () => {
               Products
             </Link>
 
-            {/* Blog Link */}
+           
             <Link
               to="/blog"
               className={`font-normal text-base px-3 py-2 rounded-md transition-colors duration-200 ${
@@ -126,7 +127,7 @@ const Navigation = () => {
               Blog
             </Link>
 
-            {/* Shop Link - This is the Shop button that goes to ShopList page */}
+            
             <Link
               to="/shop-list"
               className={`font-normal text-base px-3 py-2 rounded-md transition-colors duration-200 ${
@@ -136,7 +137,7 @@ const Navigation = () => {
               Shop
             </Link>
 
-            {/* Contact Us Link */}
+            
             <Link
               to="/contact-us"
               className={`font-normal text-base px-3 py-2 rounded-md transition-colors duration-200 ${
@@ -147,34 +148,28 @@ const Navigation = () => {
             </Link>
           </div>
 
-          {/* Search Bar */}
+          
           <div className='flex items-center'>
             <form 
-              className='hidden sm:flex items-center border border-gray-300 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-custom-pink focus-within:border-transparent transition-all duration-200 shadow-sm hover:shadow-md'
+              className='hidden sm:flex items-center border border-gray-300 rounded-lg overflow-hidden focus-within:ring-2  focus-within:border-transparent transition-all duration-200 shadow-sm hover:shadow-md'
               onSubmit={handleSearch}
             >
-              <input
-                type="text"
-                placeholder="Search..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className='px-4 py-2 outline-none w-48 lg:w-56 text-gray-700 placeholder-gray-500 bg-white'
-              />
-              <button
-                type='submit'
-                className="bg-custom-pink text-white px-4 py-2 hover:bg-pink-600 transition-colors duration-200 focus:outline-none"
-                aria-label="Search"
-              >
-                <FaSearch className='w-4 h-4' />
-              </button>
+              <input 
+                      type="search" 
+                      placeholder=" " 
+                      className="flex-1 px-4 py-3 border border-gray-200 rounded-l-md focus:outline-none  bg-white"
+                    />
+                    <button className=" px-6 py-4 bg-[#fb2e86] text-white rounded-r-md hover:bg-[#e01c6f] transition-all">
+                      <FaSearch />
+                    </button>
             </form>
           </div>
         </div>
 
-        {/* Mobile Menu */}
+       
         {isMobileMenuOpen && (
           <div className='lg:hidden border-t border-gray-200 pt-4 pb-6 mt-4'>
-            {/* Mobile Search Bar */}
+            
             <form className='mb-6' onSubmit={handleSearch}>
               <div className='flex items-center border border-gray-300 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-custom-pink focus-within:border-transparent'>
                 <input
@@ -194,9 +189,9 @@ const Navigation = () => {
               </div>
             </form>
 
-            {/* Mobile Navigation Links */}
+            
             <div className='space-y-2'>
-              {/* Home Dropdown for Mobile */}
+              
               <div className='mb-3'>
                 <select
                   value={location.pathname}
@@ -215,7 +210,7 @@ const Navigation = () => {
                 </select>
               </div>
 
-              {/* Trending Link - Mobile */}
+              
               <Link
                 to="/trending"
                 onClick={() => setIsMobileMenuOpen(false)}
@@ -228,7 +223,7 @@ const Navigation = () => {
                 Trending
               </Link>
 
-              {/* Products Link - Mobile */}
+              
               <Link
                 to="/products"
                 onClick={() => setIsMobileMenuOpen(false)}
@@ -241,7 +236,7 @@ const Navigation = () => {
                 Products
               </Link>
 
-              {/* Blog Link - Mobile */}
+              
               <Link
                 to="/blog"
                 onClick={() => setIsMobileMenuOpen(false)}
@@ -254,7 +249,7 @@ const Navigation = () => {
                 Blog
               </Link>
 
-              {/* Shop Link - Mobile (Goes to ShopList page) */}
+              
               <Link
                 to="/shop-list"
                 onClick={() => setIsMobileMenuOpen(false)}
@@ -267,7 +262,7 @@ const Navigation = () => {
                 Shop
               </Link>
 
-              {/* Contact Us Link - Mobile */}
+              
               <Link
                 to="/contact-us"
                 onClick={() => setIsMobileMenuOpen(false)}

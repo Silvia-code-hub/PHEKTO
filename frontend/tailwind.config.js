@@ -29,7 +29,10 @@ export default {
         'deep-gray': '#72718F',
         'purple-main': '#7E33E0',
         'gray-deep-shade': '#E7E4F8',
-        'off-white': '#F6F5FF'
+        'off-white': '#F6F5FF',
+        'text-blue': '#15245E',
+        'big-blue': '#1D3178',
+        'gray-light': '#C5CBE3'
     },
   }
   },

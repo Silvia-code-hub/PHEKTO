@@ -1,5 +1,5 @@
 
-
+import { Link } from "react-router-dom";
 const features = () =>{
     return(
       <div className="bg-purple-shade flex flex-col lg:flex-row items-center justify-between px-4 sm:px-6 lg:px-8 py-8 lg:py-12 gap-8 lg:gap-12 w-full ">
@@ -31,7 +31,8 @@ Trending Products</h2>
 
 
 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
-  <button className="bg-custom-pink text-white px-6 py-3 sm:px-8 sm:py-3 rounded hover:bg-pink-600 transition-colors text-sm sm:text-base font-medium whitespace-nowrap">Add To Cart</button>
+  <button className="bg-custom-pink text-white px-6 py-3 sm:px-8 sm:py-3 rounded hover:bg-pink-600 transition-colors text-sm sm:text-base font-medium whitespace-nowrap">
+    <Link to="/shopping-cart">Add To Cart </Link></button>
   <div className="flex flex-row sm:flex-col items-start  gap-1  "> 
     <p className="text-blue-shade font-medium text-sm sm:text-base">B&B Italian Sofa </p>
 <div className="text-blue-shade font-medium text-sm sm:text-xl">${32.00.toFixed(2)}</div>

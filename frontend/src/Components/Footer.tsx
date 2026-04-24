@@ -8,14 +8,16 @@ const Footer =() =>{
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12  ">
                 <div className="space-y-4 sm:space-y-6">
                  <h2 className="  font-bold text-black text-2xl sm:text-3x1 lg:text-4xl leading-tight mb-4 "> Hekto</h2>
-                 <form className="flex flex-col sm:flex-row gap-2 sm:gap-0 w-full  max-w-xs">
-                   <input
-                    type="email"
-                    name="email" 
-                    id="Enter Email Address"
-                    className="text-custom-gray flex-1 px-3 py-2 rounded text-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-custom-pink"/>
-                   <button className="bg-custom-pink text-light-blue-shade font-medium text-base items-center px-4 sm:px-6 py-2 rounded hover:bg-pink-600 transition-colors whitespace-nowrap ">Sign Up</button>
-                 </form>
+                 <div className="flex">
+                    <input 
+                      type="email" 
+                      placeholder="Enter Email Address" 
+                      className="flex-1 px-4 py-3 border border-gray-200 rounded-l-md focus:outline-none focus:border-[#fb2e86] bg-white"
+                    />
+                    <button className="px-6 py-3 bg-[#fb2e86] text-white rounded-r-md hover:bg-[#e01c6f] transition-all">
+                      Sign Up
+                    </button>
+                  </div>
                  <div className="space-y-2 text-sm mt-4"></div>
                  <p className="font-semibold text-black ">Contact Info</p>
                  <p>17 Princess Road, London, Greater London NW1 8JR, UK</p>
