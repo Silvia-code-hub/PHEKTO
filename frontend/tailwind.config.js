@@ -32,7 +32,8 @@ export default {
         'off-white': '#F6F5FF',
         'text-blue': '#15245E',
         'big-blue': '#1D3178',
-        'gray-light': '#C5CBE3'
+        'gray-light': '#C5CBE3',
+        'an-blue': '#3F509E'
     },
   }
   },
