@@ -27,7 +27,7 @@ const Navigation = () => {
     { id: 5, label: 'Shopping Cart', path: '/shopping-cart' },
     { id: 6, label: 'Order Completed', path: '/order-complete' },
     { id: 7, label: 'Hekto Demo', path: '/hekto-demo' },
-    { id: 8, label: 'My Account', path: '/my-acc' },
+    { id: 8, label: 'My Account', path: '/my-account' },
     { id: 9, label: 'Blog Page', path: '/blog' },
     { id: 10, label: 'Single Blog', path: '/single-blog' },
     { id: 11, label: 'About Us', path: '/about-us' },

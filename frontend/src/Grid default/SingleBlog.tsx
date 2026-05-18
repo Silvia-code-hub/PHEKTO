@@ -1,4 +1,4 @@
-import Layout from "../Components/Layout";
+import Layout from "../Components/layout";
 import { FaPenNib } from "react-icons/fa";
 import { FaCalendarDays } from "react-icons/fa6";
 import {  FaSearch,FaFacebook,FaInstagramSquare, FaTwitterSquare } from 'react-icons/fa';
@@ -55,32 +55,32 @@ const SingleBlog: React.FC<Blogs> = (Blogproduct) => {
         
             <div className="page">
                 <Layout>
-                <div className="top-part">
-                    <div className="top-box">
-                        <h2 className="page-title">Single Blog</h2>
-                    <div className="buttons">
+                <div className=" top-part bg-[#F6F5FF] align-center ">
+                    <div className="top-box p-4">
+                        <h2 className=" #101750 flex font-bold text-2xl ">Single Blog</h2>
+                    <div className="buttons flex gap-4">
                       <div><button className="nav-link">Home</button></div>
                         <ul><li><div><button className="nave-link">Pages</button></div></li></ul>
-                        <ul><li><div><button className="nave-link">Single Blog</button></div></li></ul>
+                        <ul><li><div><button className="nave-link flex">Single Blog</button></div></li></ul>
                     </div>
                     </div>
                     
                 </div>
-                <div className="lower-part">
-                    <div className="lower-left">
+                <div className="lower-part flex">
+                    <div className="lower-left justify-between w-3/4">
                         <div className="image first">
                             <img src="src/assets/images/image_062.jpg" alt="" />
                         </div>
-                          <div className="image-icons">
-                              <span className="side-icon"><FaPenNib/></span>
-                              <span className="side-name">Surf Auxion</span>
-                              <span className="side-number"><FaCalendarDays/></span>
-                              <span className="side-date">Aug 09 2020</span>
+                          <div className="image-icons flex">
+                              <span className="side-icon bg-custom-pink"><FaPenNib/></span>
+                              <span className="side-name text-deep-blue">Surf Auxion</span>
+                              <span className="side-number bg-orange-400"><FaCalendarDays/></span>
+                              <span className="side-date text-deep-blue">Aug 09 2020</span>
                           </div>
                             <div className="image-info">
-                                <h2 className="info-heading">Mauris at orci non vulputate diam tincidunt nec.</h2>
-                                <p className="description-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit facilisis quis auctor pretium ipsum, eu rutrum. Condimentum eu malesuada vitae ultrices in in neque, porta dignissim. Adipiscing purus, cursus vulputate id id dictum at.</p>
-                                <div className="image-info2">
+                                <h2 className="info-heading font-bold text-3xl text-deep-blue">Mauris at orci non vulputate diam tincidunt nec.</h2>
+                                <p className="description-1 text-gray-faint m-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit facilisis quis auctor pretium ipsum, eu rutrum. Condimentum eu malesuada vitae ultrices in in neque, porta dignissim. Adipiscing purus, cursus vulputate id id dictum at.</p>
+                                <div className="image-info2 text-gray-faint m-2">
                                     <p className="description-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, montes, lacus consequat integer viverra. Sit morbi etiam quam rhoncus. Velit in arcu platea donec vitae ante posuere malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, montes, lacus consequat integer viverra. Sit morbi etiam quam rhoncus. Velit in arcu platea donec vitae ante posuere malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, </p>
                                 <p className="description-3">“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo dictum sapien, amet, consequat.
 
@@ -94,9 +94,9 @@ const SingleBlog: React.FC<Blogs> = (Blogproduct) => {
                                 <div className="part-next">
                                     <div className="images-cont">
                                         <video src=""></video>
-                                        <img src="src/assets/images/image_064.jpg" alt="" />
+                                        <img src="https://res.cloudinary.com/dua4go47y/image/upload/v1777010227/products/image_065.jpg" alt="" />
                                     </div>
-                                    <p className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, montes, lacus consequat integer viverra. Sit morbi etiam quam rhoncus. Velit in arcu platea donec vitae ante posuere malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, montes, lacus consequat integer viverra. Sit morbi etiam quam rhoncus. Velit in arcu platea donec vitae ante posuere malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc,  </p>
+                                    <p className="description text-gray-faint m-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, montes, lacus consequat integer viverra. Sit morbi etiam quam rhoncus. Velit in arcu platea donec vitae ante posuere malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, montes, lacus consequat integer viverra. Sit morbi etiam quam rhoncus. Velit in arcu platea donec vitae ante posuere malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc,  </p>
 
                                 </div>
                                 <div className="part-lower">
@@ -131,8 +131,8 @@ const SingleBlog: React.FC<Blogs> = (Blogproduct) => {
 
                                    
                                    <div className="description-cont">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, montes, lacus consequat integer viverra. Sit morbi etiam quam rhoncus. Velit in arcu platea donec vitae ante posuere malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, montes, lacus consequat integer viverra. Sit morbi etiam quam rhoncus. Velit in arcu platea donec vitae ante posuere malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, </p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, montes, lacus consequat integer viverra. Sit morbi etiam quam rhoncus. Velit in arcu platea donec vitae ante posuere malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, montes, lacus consequat integer viverra. Sit morbi etiam quam rhoncus. Velit in arcu platea donec vitae ante posuere malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, </p>
+                                    <p className="text-gray-faint m-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, montes, lacus consequat integer viverra. Sit morbi etiam quam rhoncus. Velit in arcu platea donec vitae ante posuere malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, montes, lacus consequat integer viverra. Sit morbi etiam quam rhoncus. Velit in arcu platea donec vitae ante posuere malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, </p>
+                                    <p className="text-gray-faint m-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, montes, lacus consequat integer viverra. Sit morbi etiam quam rhoncus. Velit in arcu platea donec vitae ante posuere malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, montes, lacus consequat integer viverra. Sit morbi etiam quam rhoncus. Velit in arcu platea donec vitae ante posuere malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, </p>
                                    </div>
                                      <div className="icons">
                                                                    <span className="icon0"><FaFacebook/></span>
