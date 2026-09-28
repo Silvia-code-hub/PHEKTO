@@ -6,6 +6,7 @@ const {validateProduct} = require('../middlewares/validate');
 const {authenticateToken, authorizeVendororAdmin} = require ('../middlewares/auth')
 
 router.get('/', productController.getAllProducts);
+router.get('/vendor/my-products', authenticateToken, authorizeVendororAdmin, productController.getVendorProducts);
 router.get('/featured', productController.getFeaturedProducts);  
 router.get('/latest', productController.getLatestProducts);
 router.get('/trending', productController.getTrendingProducts);

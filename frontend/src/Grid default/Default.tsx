@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Layout from "../Components/layout";
 import { getImageUrl, getProducts } from "../Services/productService";
+import { useAuth } from "../context/AuthContext";
+import { useCart } from "../context/CartContext";
 import { FaShoppingCart, FaRegHeart, FaSearchPlus, FaTh, FaThList } from 'react-icons/fa';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
@@ -14,6 +17,10 @@ interface Product {
 }
 
 const Default: React.FC = () => {
+    const navigate = useNavigate();
+    const { user } = useAuth();
+    const { addToCart } = useCart();
+
     const [products, setProducts] = useState<Product[]>([]);
     const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
@@ -21,8 +28,9 @@ const Default: React.FC = () => {
     const [sortBy, setSortBy] = useState('name');
     const [itemsPerPage] = useState(12);
     const [currentPage, setCurrentPage] = useState(1);
-    const [priceRange, setPriceRange] = useState({ min: 0, max: 500 });
+    const [priceRange] = useState({ min: 0, max: 500 });
     const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+    const [addingId, setAddingId] = useState<number | null>(null);
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -45,7 +53,7 @@ const Default: React.FC = () => {
     useEffect(() => {
         let filtered = [...products];
         filtered = filtered.filter(p => p.price >= priceRange.min && p.price <= priceRange.max);
-        
+
         if (sortBy === 'name') {
             filtered.sort((a, b) => a.name.localeCompare(b.name));
         } else if (sortBy === 'price_low') {
@@ -53,7 +61,7 @@ const Default: React.FC = () => {
         } else if (sortBy === 'price_high') {
             filtered.sort((a, b) => b.price - a.price);
         }
-        
+
         setFilteredProducts(filtered);
         setCurrentPage(1);
     }, [sortBy, priceRange, products]);
@@ -66,6 +74,35 @@ const Default: React.FC = () => {
         if (price === null || price === undefined) return '0.00';
         const numPrice = typeof price === 'string' ? parseFloat(price) : price;
         return isNaN(numPrice) ? '0.00' : numPrice.toFixed(2);
+    };
+
+   
+    const handleAddToCart = async (e: React.MouseEvent, productId: number) => {
+        e.stopPropagation();
+        if (!user) {
+            alert('Please login to add items to cart');
+            navigate('/login');
+            return;
+        }
+        setAddingId(productId);
+        try {
+            await addToCart(productId, 1);
+            alert('Added to cart!');
+        } catch (err: any) {
+            alert(err.response?.data?.error || 'Failed to add to cart');
+        } finally {
+            setAddingId(null);
+        }
+    };
+
+    const handleViewDetails = (e: React.MouseEvent, productId: number) => {
+        e.stopPropagation();
+        navigate(`/product-details/${productId}`);
+    };
+
+    const handleWishlist = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        alert('Wishlist feature coming soon!');
     };
 
     if (loading) {
@@ -90,10 +127,8 @@ const Default: React.FC = () => {
 
     return (
         <Layout>
-           
             <div className="w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-               
-               
+                
                 <div className="breadcrumb mb-6 bg-off-white pb-40 pt-20 pl-5 w-full">
                     <h1 className="text-3xl font-bold text-blue-shade mb-2">Shop Grid Default</h1>
                     <div className="flex gap-2 text-sm text-black mt-5">
@@ -103,7 +138,7 @@ const Default: React.FC = () => {
                     </div>
                 </div>
 
-                
+
                 <div className="header-section flex justify-between items-center mb-8 flex-wrap gap-4 w-full">
                     <div>
                         <h2 className="text-xl font-semibold text-blue-shade">
@@ -117,15 +152,15 @@ const Default: React.FC = () => {
                         <span className='text-blue-600'>Per page:</span>
                         <select
                             value={itemsPerPage}
-                            onChange={(e) => setCurrentPage(1)}
+                            onChange={() => setCurrentPage(1)}
                             className="border rounded px-3 py-1 text-sm"
                         >
                             <option value={12}>12</option>
                             <option value={24}>24</option>
                             <option value={36}>36</option>
-                        </select>   
+                        </select>
                         <span className="text-sm text-blue-600">Sort By:</span>
-                        <select 
+                        <select
                             value={sortBy}
                             onChange={(e) => setSortBy(e.target.value)}
                             className="border rounded px-3 py-1 text-sm"
@@ -135,13 +170,13 @@ const Default: React.FC = () => {
                             <option value="price_high">Price: High to Low</option>
                         </select>
                         <span className="text-sm text-blue-600">View all</span>
-                        
+
                         <div className="flex gap-2 border-l pl-4 ml-2">
                             <button
                                 onClick={() => setViewMode('grid')}
                                 className={`p-2 rounded transition-colors ${
-                                    viewMode === 'grid' 
-                                        ? 'bg-gray-500 text-white' 
+                                    viewMode === 'grid'
+                                        ? 'bg-gray-500 text-white'
                                         : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
                                 }`}
                                 aria-label="Grid view"
@@ -151,8 +186,8 @@ const Default: React.FC = () => {
                             <button
                                 onClick={() => setViewMode('list')}
                                 className={`p-2 rounded transition-colors ${
-                                    viewMode === 'list' 
-                                        ? 'bg-gray-500 text-white' 
+                                    viewMode === 'list'
+                                        ? 'bg-gray-500 text-white'
                                         : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
                                 }`}
                                 aria-label="List view"
@@ -163,51 +198,68 @@ const Default: React.FC = () => {
                     </div>
                 </div>
 
-                
                 <div className="w-full">
                     
                     {viewMode === 'grid' && (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-4 md:gap-5 lg:gap-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5 lg:gap-6">
                             {visibleProducts.map((product) => {
                                 const imageUrl = getImageUrl(product.image_url);
 
                                 return (
                                     <div key={product.product_id} className="product-card group bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
                                         <div className="image-container relative bg-gray-100 h-64 rounded-t-lg overflow-hidden">
-                                            <img 
-                                                src={imageUrl} 
+                                            <img
+                                                src={imageUrl}
                                                 alt={product.name}
-                                                className="w-full h-full object-contain p-4 transition-transform duration-300 group-hover:scale-105"
+                                                className="w-full h-full object-contain p-4 transition-transform duration-300 group-hover:scale-105 cursor-pointer"
+                                                onClick={(e) => handleViewDetails(e, product.product_id)}
                                                 onError={(e) => {
                                                     (e.target as HTMLImageElement).src = '/placeholder.jpg';
                                                 }}
                                             />
-                                            
-                                            <div className="absolute top-2 right-2 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                                <div className="bg-white rounded-full p-2 shadow-md hover:bg-purple-500 cursor-pointer transition-colors">
+
+                                           
+                                            <div className="absolute top-2 right-2 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                                                <button
+                                                    onClick={(e) => handleAddToCart(e, product.product_id)}
+                                                    disabled={addingId === product.product_id}
+                                                    className="bg-white rounded-full p-2 shadow-md hover:bg-purple-500 transition-colors cursor-pointer disabled:opacity-50"
+                                                    title="Add to Cart"
+                                                >
                                                     <FaShoppingCart className="text-purple-500 hover:text-white text-sm" />
-                                                </div>
-                                                <div className="bg-white rounded-full p-2 shadow-md cursor-pointer transition-colors">
+                                                </button>
+                                                <button
+                                                    onClick={handleWishlist}
+                                                    className="bg-white rounded-full p-2 shadow-md hover:bg-pink-500 transition-colors cursor-pointer"
+                                                    title="Add to Wishlist"
+                                                >
                                                     <FaRegHeart className="text-pink-500 hover:text-white text-sm" />
-                                                </div>
-                                                <div className="bg-white rounded-full p-2 shadow-md cursor-pointer transition-colors">
+                                                </button>
+                                                <button
+                                                    onClick={(e) => handleViewDetails(e, product.product_id)}
+                                                    className="bg-white rounded-full p-2 shadow-md hover:bg-blue-500 transition-colors cursor-pointer"
+                                                    title="View Details"
+                                                >
                                                     <FaSearchPlus className="text-blue-500 hover:text-white text-sm" />
-                                                </div>
+                                                </button>
                                             </div>
                                         </div>
-                                        
-                                        <div className="product-info p-4 text-center">
+
+                                        <div
+                                            className="product-info p-4 text-center cursor-pointer"
+                                            onClick={(e) => handleViewDetails(e, product.product_id)}
+                                        >
                                             <h3 className="font-semibold text-base text-blue-shade hover:text-pink-500 transition-colors">
                                                 {product.name}
                                             </h3>
                                             <p className="text-xs text-gray-400 mt-1">{product.sku}</p>
-                                            
+
                                             <div className="flex justify-center gap-1 mt-2">
                                                 <span className="w-3 h-3 rounded-full bg-blue-500"></span>
                                                 <span className="w-3 h-3 rounded-full bg-pink-500"></span>
                                                 <span className="w-3 h-3 rounded-full bg-green-500"></span>
                                             </div>
-                                            
+
                                             <div className="pricing mt-2 flex justify-center gap-2">
                                                 <span className="text-blue-shade font-bold">
                                                     ${formatPrice(product.price)}
@@ -225,17 +277,20 @@ const Default: React.FC = () => {
                         </div>
                     )}
 
-                    {/* List View */}
+                   
                     {viewMode === 'list' && (
                         <div className="flex flex-col gap-4 w-full">
                             {visibleProducts.map((product) => {
                                 const imageUrl = getImageUrl(product.image_url);
-                                
+
                                 return (
                                     <div key={product.product_id} className="product-card-list group bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300 flex p-4 gap-4 w-full">
-                                        <div className="image-container relative bg-gray-100 w-32 h-32 rounded-lg overflow-hidden flex-shrink-0">
-                                            <img 
-                                                src={imageUrl} 
+                                        <div
+                                            className="image-container relative bg-gray-100 w-32 h-32 rounded-lg overflow-hidden flex-shrink-0 cursor-pointer"
+                                            onClick={(e) => handleViewDetails(e, product.product_id)}
+                                        >
+                                            <img
+                                                src={imageUrl}
                                                 alt={product.name}
                                                 className="w-full h-full object-contain p-2"
                                                 onError={(e) => {
@@ -243,21 +298,24 @@ const Default: React.FC = () => {
                                                 }}
                                             />
                                         </div>
-                                        
+
                                         <div className="product-info-list flex-1 flex flex-col justify-between">
                                             <div>
-                                                <h3 className="font-semibold text-lg text-blue-shade hover:text-pink-500 transition-colors">
+                                                <h3
+                                                    className="font-semibold text-lg text-blue-shade hover:text-pink-500 transition-colors cursor-pointer"
+                                                    onClick={(e) => handleViewDetails(e, product.product_id)}
+                                                >
                                                     {product.name}
                                                 </h3>
                                                 <p className="text-xs text-gray-400 mt-1">{product.sku}</p>
-                                                
+
                                                 <div className="flex gap-1 mt-2">
                                                     <span className="w-3 h-3 rounded-full bg-blue-500"></span>
                                                     <span className="w-3 h-3 rounded-full bg-pink-500"></span>
                                                     <span className="w-3 h-3 rounded-full bg-green-500"></span>
                                                 </div>
                                             </div>
-                                            
+
                                             <div className="flex justify-between items-center mt-4">
                                                 <div className="pricing flex gap-2">
                                                     <span className="text-blue-shade font-bold text-lg">
@@ -269,17 +327,31 @@ const Default: React.FC = () => {
                                                         </span>
                                                     )}
                                                 </div>
-                                                
+
+                                                {/* ✅ CLICKABLE ICONS — List View */}
                                                 <div className="flex gap-2">
-                                                    <div className="bg-white rounded-full p-2 shadow-md hover:bg-purple-500 cursor-pointer transition-colors">
+                                                    <button
+                                                        onClick={(e) => handleAddToCart(e, product.product_id)}
+                                                        disabled={addingId === product.product_id}
+                                                        className="bg-white rounded-full p-2 shadow-md hover:bg-purple-500 transition-colors cursor-pointer disabled:opacity-50"
+                                                        title="Add to Cart"
+                                                    >
                                                         <FaShoppingCart className="text-purple-500 hover:text-white text-sm" />
-                                                    </div>
-                                                    <div className="bg-white rounded-full p-2 shadow-md cursor-pointer transition-colors">
+                                                    </button>
+                                                    <button
+                                                        onClick={handleWishlist}
+                                                        className="bg-white rounded-full p-2 shadow-md hover:bg-pink-500 transition-colors cursor-pointer"
+                                                        title="Add to Wishlist"
+                                                    >
                                                         <FaRegHeart className="text-pink-500 hover:text-white text-sm" />
-                                                    </div>
-                                                    <div className="bg-white rounded-full p-2 shadow-md cursor-pointer transition-colors">
+                                                    </button>
+                                                    <button
+                                                        onClick={(e) => handleViewDetails(e, product.product_id)}
+                                                        className="bg-white rounded-full p-2 shadow-md hover:bg-blue-500 transition-colors cursor-pointer"
+                                                        title="View Details"
+                                                    >
                                                         <FaSearchPlus className="text-blue-500 hover:text-white text-sm" />
-                                                    </div>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -289,10 +361,10 @@ const Default: React.FC = () => {
                         </div>
                     )}
 
-                    {/* Pagination */}
+                  
                     {totalPages > 1 && (
                         <div className="pagination flex justify-center gap-2 mt-8">
-                            <button 
+                            <button
                                 onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                                 disabled={currentPage === 1}
                                 className="w-8 h-8 rounded-full border hover:bg-pink-500 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
@@ -322,7 +394,7 @@ const Default: React.FC = () => {
                                     </button>
                                 );
                             })}
-                            <button 
+                            <button
                                 onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
                                 disabled={currentPage === totalPages}
                                 className="w-8 h-8 rounded-full border hover:bg-pink-500 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
@@ -333,10 +405,10 @@ const Default: React.FC = () => {
                     )}
                 </div>
 
-                {/* Advertisement - Full width */}
+               
                 <div className="advertisement mt-12 w-full">
-                    <img 
-                        src={getImageUrl('/uploads/products/image_015.png')} 
+                    <img
+                        src={getImageUrl('/uploads/products/image_015.png')}
                         alt="Advertisement"
                         className="w-full rounded-lg"
                         onError={(e) => {

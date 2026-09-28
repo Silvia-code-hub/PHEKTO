@@ -3,20 +3,41 @@ const db = require('../config/database');
 const cartController = {
     getUserCart: async (req, res) =>{
         try{
-        const userCart = await db.query('SELECT * FROM carts WHERE user_id = ?', [req.params.userId]);
-        console.log('get all items in usercart', userCart);
-
+         const userId = req.params.userId;
+        
+        const userCart = await db.query(
+            `SELECT 
+                c.cart_id,
+                c.user_id,
+                c.product_id,
+                c.quantity,
+                p.name,
+                p.price,
+                p.old_price,
+                p.image_url,
+                p.sku,
+                p.quantity AS stock
+             FROM carts c
+             JOIN products p ON c.product_id = p.product_id
+             WHERE c.user_id = ?
+             ORDER BY c.created_at DESC`,
+            [userId]
+        );
+        
+        console.log('🛒 Cart items for user', userId, ':', userCart.length);
+        
         res.json({
             success: true,
             data: userCart
-
         });
     } catch (error) {
+        console.error('Get cart error:', error);
         res.status(500).json({
-            success: false ,
+            success: false,
             message: 'userCart not available'
         });
     }
+    
     },
 
     addToCart: async (req, res) => {

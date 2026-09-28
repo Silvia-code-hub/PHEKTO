@@ -272,13 +272,19 @@ const authController = {
     googleCallback: (req, res) => {
          console.log('Google callback received');
     passport.authenticate('google', { session: false }, async (err, user) => {
-        if (err || !user) {
+        if (err ) {
+            console.error(' Google auth error:', err)
             return res.redirect(`${process.env.FRONTEND_URL}/login?error=google_auth_failed`);
+        }
+
+        if (!user) {
+            console.error(' No user returned from Google');
+            return res.redirect(`${process.env.FRONTEND_URL}/login?error=no_user`);
         }
         try{
 
         const { accessToken, refreshToken } = await generateTokens(user);
-         console.log('Tokens generated successfully');
+         console.log(' Google login successful for:', user.email);
 
         return res.redirect(
             `${process.env.FRONTEND_URL}/auth/callback?accessToken=${accessToken}&refreshToken=${refreshToken}`

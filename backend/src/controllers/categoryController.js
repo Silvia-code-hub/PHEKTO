@@ -90,6 +90,163 @@ const categoryController = {
                 error: 'Failed to fetch products'
             });
         }
+    },
+
+     createCategory: async (req, res) => {
+        try {
+            const { name, slug, description, image_url, display_order } = req.body;
+
+            if (!name) {
+                return res.status(400).json({ success: false, error: 'Category name is required' });
+            }
+
+            const autoSlug = slug || name.toLowerCase().replace(/\s+/g, '-');
+
+            
+            const existing = await db.getOne(
+                'SELECT category_id FROM categories WHERE category_slug = ?',
+                [autoSlug]
+            );
+
+            if (existing) {
+                return res.status(400).json({ 
+                    success: false, 
+                    error: 'A category with this slug already exists' 
+                });
+            }
+
+            const categoryId = await db.insert(
+                `INSERT INTO categories 
+                (category_name, category_slug, description, image_url, display_order, created_at, updated_at) 
+                VALUES (?, ?, ?, ?, ?, NOW(), NOW())`,
+                [
+                    name, 
+                    autoSlug, 
+                    description || null, 
+                    image_url || null, 
+                    display_order || 0
+                ]
+            );
+
+            const newCategory = await db.getOne(
+                'SELECT * FROM categories WHERE category_id = ?',
+                [categoryId]
+            );
+
+            res.status(201).json({ 
+                success: true, 
+                message: 'Category created successfully',
+                data: newCategory 
+            });
+        } catch (error) {
+            console.error('Create category error:', error);
+            res.status(500).json({ success: false, error: 'Failed to create category' });
+        }
+    },
+
+    
+    updateCategory: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const { name, slug, description, image_url, display_order } = req.body;
+
+            
+            const existing = await db.getOne(
+                'SELECT * FROM categories WHERE category_id = ?',
+                [id]
+            );
+
+            if (!existing) {
+                return res.status(404).json({ success: false, error: 'Category not found' });
+            }
+
+            
+            if (slug && slug !== existing.category_slug) {
+                const slugTaken = await db.getOne(
+                    'SELECT category_id FROM categories WHERE category_slug = ? AND category_id != ?',
+                    [slug, id]
+                );
+                if (slugTaken) {
+                    return res.status(400).json({ 
+                        success: false, 
+                        error: 'Slug already in use by another category' 
+                    });
+                }
+            }
+
+            await db.update(
+                `UPDATE categories 
+                 SET category_name = COALESCE(?, category_name),
+                     category_slug = COALESCE(?, category_slug),
+                     description = COALESCE(?, description),
+                     image_url = COALESCE(?, image_url),
+                     display_order = COALESCE(?, display_order),
+                     updated_at = NOW()
+                 WHERE category_id = ?`,
+                [
+                    name || null,
+                    slug || null,
+                    description !== undefined ? description : null,
+                    image_url !== undefined ? image_url : null,
+                    display_order !== undefined ? display_order : null,
+                    id
+                ]
+            );
+
+            const updated = await db.getOne(
+                'SELECT * FROM categories WHERE category_id = ?',
+                [id]
+            );
+
+            res.json({ 
+                success: true, 
+                message: 'Category updated successfully',
+                data: updated 
+            });
+        } catch (error) {
+            console.error('Update category error:', error);
+            res.status(500).json({ success: false, error: 'Failed to update category' });
+        }
+    },
+
+    
+    deleteCategory: async (req, res) => {
+        try {
+            const { id } = req.params;
+
+            
+            const existing = await db.getOne(
+                'SELECT * FROM categories WHERE category_id = ?',
+                [id]
+            );
+
+            if (!existing) {
+                return res.status(404).json({ success: false, error: 'Category not found' });
+            }
+
+            
+            const products = await db.getOne(
+                'SELECT COUNT(*) as count FROM products WHERE category_id = ?',
+                [id]
+            );
+
+            if (products.count > 0) {
+                return res.status(400).json({
+                    success: false,
+                    error: `Cannot delete — ${products.count} product(s) use this category. Reassign them first.`
+                });
+            }
+
+            await db.delete('DELETE FROM categories WHERE category_id = ?', [id]);
+
+            res.json({ 
+                success: true, 
+                message: 'Category deleted successfully' 
+            });
+        } catch (error) {
+            console.error('Delete category error:', error);
+            res.status(500).json({ success: false, error: 'Failed to delete category' });
+        }
     }
 };
 

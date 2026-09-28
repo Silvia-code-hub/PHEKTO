@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
+import { CartProvider } from './context/CartContext';
 import ProtectedRoute from "./Components/ProtectedRoute";
+
 
 import HomePage from "./Pages/HomePage";
 import VerifyEmail from './Pages/VerifyEmail';
@@ -26,6 +28,22 @@ import ShoppingCart from "./Grid default/ShoppingCart";
 import Sidebar from "./Grid default/Sidebar";
 import SingleBlog from "./Grid default/SingleBlog";
 
+import MyProducts from "./Pages/vendor/MyProducts";
+import AddProduct from "./Pages/vendor/AddProduct";
+import EditProduct from "./Pages/vendor/EditProduct";
+
+import AdminDashboard from './Pages/admin/AdminDashboard';
+import AdminUsers from './Pages/admin/AdminUsers';
+import AdminProducts from './Pages/admin/AdminProducts';
+import AdminOrders from './Pages/admin/AdminOrders';
+import AdminVendors from './Pages/admin/AdminVendors';
+import AdminCategories from './Pages/admin/AdminCategories';
+import VendorOrders from './Pages/vendor/VendorOrders';
+import MyOrders from './Pages/MyOrders';
+import OrderDetails from './Pages/OrderDetails';
+
+import AuthCallback from './Pages/AuthCallback';
+
 
 
 
@@ -35,13 +53,94 @@ const AppRouter = () => {
     return(
         <Router>
             <AuthProvider>
+                <CartProvider>
                 <Routes>
                     <Route path="/verify-email" element={<VerifyEmail />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/forgot-password" element={<ForgotPassword />} />
                     <Route path="/reset-password" element={<ResetPassword />} />
+                    <Route path="/auth/callback" element={<AuthCallback />} />
 
+                    <Route path="/my-orders" element={
+                          <ProtectedRoute>
+                              <MyOrders />
+                          </ProtectedRoute>
+                      }
+                       />
+                     <Route path="/order-details/:id" element={
+                            <ProtectedRoute>
+                                <OrderDetails />
+                            </ProtectedRoute>
+                        } 
+                        />  
+                    <Route 
+                        path="/vendor/products" 
+                        element={
+                            <ProtectedRoute allowedRoles={['vendor', 'admin']}>
+                                <MyProducts />
+                            </ProtectedRoute>
+                        } 
+                    />
+                    <Route 
+                        path="/vendor/add-product" 
+                        element={
+                            <ProtectedRoute allowedRoles={['vendor', 'admin']}>
+                                <AddProduct />
+                            </ProtectedRoute>
+                        } 
+                    />
+                    <Route 
+                        path="/vendor/edit-product/:id" 
+                        element={
+                            <ProtectedRoute allowedRoles={['vendor', 'admin']}>
+                                <EditProduct />
+                            </ProtectedRoute>
+                        } 
+                    />
+                    <Route path="/vendor/orders" element={
+                         <ProtectedRoute allowedRoles={['vendor', 'admin']}>
+                             <VendorOrders />
+                         </ProtectedRoute>
+                       }
+                         />
+                        
+                        <Route path="/admin/dashboard" element={
+                            <ProtectedRoute allowedRoles={['admin']}>
+                                <AdminDashboard />
+                            </ProtectedRoute>
+                        } 
+                    />
+                        <Route path="/admin/users" element={
+                            <ProtectedRoute allowedRoles={['admin']}>
+                                <AdminUsers />
+                            </ProtectedRoute>
+                        } 
+                    />
+                        <Route path="/admin/products" element={
+                            <ProtectedRoute allowedRoles={['admin']}>
+                                <AdminProducts />
+                            </ProtectedRoute>
+                        }
+                     />
+                        <Route path="/admin/orders" element={
+                            <ProtectedRoute allowedRoles={['admin']}>
+                                <AdminOrders />
+                            </ProtectedRoute>
+                        } 
+                    />
+                        <Route path="/admin/categories" element={
+                            <ProtectedRoute allowedRoles={['admin']}>
+                                <AdminCategories />
+                            </ProtectedRoute>
+                        }
+                         />
+                        <Route path="/admin/vendors" element={
+                            <ProtectedRoute allowedRoles={['admin']}>
+                                <AdminVendors />
+                            </ProtectedRoute>
+                        } 
+                    />
 
                     <Route path="/" element={<ProtectedRoute><HomePage/></ProtectedRoute>}/>
                     <Route path="/products" element={<ProtectedRoute><ProductsPage/></ProtectedRoute>}/>
@@ -55,19 +154,20 @@ const AppRouter = () => {
                     <Route path="/hekto-demo" element={<ProtectedRoute><HektoDemo/></ProtectedRoute>}/>
                     <Route path="/my-account" element={<ProtectedRoute><MyAcc/></ProtectedRoute>}/>
                     <Route path="/order-complete" element={<ProtectedRoute><OrderComplete/></ProtectedRoute>}/>
-                    <Route path="/product-details" element={<ProtectedRoute><ProductDetails/></ProtectedRoute>}/>
+                    <Route path="/product-details/:id" element={<ProtectedRoute><ProductDetails/></ProtectedRoute>}/>
                     <Route path="/shopping-cart" element={<ProtectedRoute><ShoppingCart/></ProtectedRoute>}/>
                     <Route path="/side-bar" element={<ProtectedRoute><Sidebar/></ProtectedRoute>}/>
                     <Route path="/single-blog" element={<ProtectedRoute><SingleBlog/></ProtectedRoute>}/>
 
                  <Route path="*" element={<NotFound/>}/>
 
-                {/* <Route path="//:id" element={<dropdowns/>}/> */}
+                
                 
 
 
                 
             </Routes>
+            </CartProvider>
             </AuthProvider>
         </Router>
     )

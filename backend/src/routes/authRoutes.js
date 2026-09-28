@@ -1,6 +1,11 @@
 const express = require('express');
 const router = express.Router();
+router.get('/ping', (req, res) => {
+    res.json({ message: 'Pong! Auth routes are working!' });
+});
 const authController = require('../controllers/authController');
+
+console.log('✅ authRoutes loaded! Available routes: /register, /login, /google, /google/callback');
 
 router.post('/register',authController.register);
 router.post('/verify-email', authController.verifyEmail);

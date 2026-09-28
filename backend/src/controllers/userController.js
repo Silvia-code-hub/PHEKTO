@@ -29,7 +29,7 @@ const userController  = {
             if(requestedUserId != authenticatedUserId) {
                 return res.status(403).json({
                     success:false,
-                    error: 'You are not authorized to view this user'
+                    error: 'You are not authorized to view this user details'
                 });
             }
             if(req.params.id != req.user.id) {
@@ -180,6 +180,10 @@ const userController  = {
              FROM users WHERE user_id = ?`,
             [req.user.id]
         );
+
+         if (!user) {
+            return res.status(404).json({ success: false, error: 'User not found' });
+        }
         res.json({ success: true, data: user });
     } catch (error) {
         res.status(500).json({ success: false, error: 'Failed to fetch user' });

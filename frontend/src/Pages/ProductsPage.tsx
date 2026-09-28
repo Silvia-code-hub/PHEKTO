@@ -14,7 +14,7 @@ const ProductsPage =() => {
                     <LeastGrid/>
                     <TopGrid/>
                     <ShopexCard/>
-                    <TopGrid/>
+                    
                 </div>
             </Layout>
         </div>

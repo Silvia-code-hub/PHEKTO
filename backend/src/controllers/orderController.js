@@ -99,7 +99,7 @@ const orderController = {
             console.log('Fetching all orders for user:',userId);
 
             const orders = await db.query(
-                `SELECT * FROM orders WHERE user_id = ? ORDER BY order_date  DESC`, [userId]
+                `SELECT * FROM orders WHERE user_id = ? ORDER BY created_at DESC`, [userId]
             );
 
             const ordersWithItems = [];
@@ -123,6 +123,7 @@ const orderController = {
             });
 
         }  catch(error) {
+             console.error('Get user orders error:', error);
 
              res.status(500).json({
                 success: false,
@@ -138,7 +139,13 @@ const orderController = {
 
             console.log('Fetching order...', orderId);
 
-            const order = await db.query(`SELECT o.*, u.username,u.email FROM orders o JOIN users u ON  u.user_id = o.user_id WHERE o.order_id = ?`, [orderId]);
+            const order = await db.getOne(
+            `SELECT o.*, u.username, u.email 
+             FROM orders o 
+             JOIN users u ON u.user_id = o.user_id 
+             WHERE o.order_id = ?`,
+            [orderId]
+        );
              console.log('Order found:', order);
 
             if(!order) {
@@ -270,7 +277,7 @@ const orderController = {
                 `SELECT o.*, u.username, u.email 
                  FROM orders o
                  JOIN users u ON o.user_id = u.user_id
-                 ORDER BY o.order_date DESC`
+                 ORDER BY o.created_at DESC`
             );
             
             res.json({
