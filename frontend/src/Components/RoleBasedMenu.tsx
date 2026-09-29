@@ -2,14 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { 
-    FaTachometerAlt,    // Dashboard icon (speedometer)
-    FaBox,              // Products icon (box)
-    FaPlus,             // Add icon (plus sign)
-    FaUsers,            // Users icon (people)
-    FaShoppingBag,      // Orders icon (shopping bag)
-    FaHeart,            // Wishlist icon (heart)
-    FaUser,             // Profile icon (user)
-    FaSignOutAlt,        // Logout icon (door with arrow)
+    FaTachometerAlt,    
+    FaBox,             
+    FaPlus,             
+    FaUsers,            
+    FaShoppingBag,     
+    FaHeart,           
+    FaUser,            
+    FaSignOutAlt,      
     FaTags
 } from 'react-icons/fa';
 

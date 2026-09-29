@@ -74,9 +74,12 @@ function Header() {
                    
                     {user ? (
                         <>
-                            <span className='hidden md:inline text-green-400 text-xs font-semibold'>
-                                Hi, {user.username}
-                            </span>
+                           <Link 
+                                 to="/profile"
+                                 className='hidden md:inline text-green-400 text-xs font-semibold hover:text-green-300'
+                             >
+                                 Hi, {user.username}
+                             </Link>
 
                             <RoleBasedMenu />
                             <button 

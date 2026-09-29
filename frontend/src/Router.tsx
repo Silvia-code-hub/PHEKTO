@@ -10,6 +10,7 @@ import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import ForgotPassword from './Pages/ForgotPassword';
 import ResetPassword from './Pages/ResetPassword';
+import Profile from "./Pages/Profile";
 
 import ProductsPage from "./Pages/ProductsPage";
 import TrendingPage from "./Pages/TrendingPage";
@@ -42,6 +43,7 @@ import VendorOrders from './Pages/vendor/VendorOrders';
 import MyOrders from './Pages/MyOrders';
 import OrderDetails from './Pages/OrderDetails';
 
+
 import AuthCallback from './Pages/AuthCallback';
 
 
@@ -62,6 +64,13 @@ const AppRouter = () => {
                     <Route path="/reset-password" element={<ResetPassword />} />
                     <Route path="/auth/callback" element={<AuthCallback />} />
 
+                    <Route path="/profile" element={
+                        <ProtectedRoute>
+                            <Profile />
+                        </ProtectedRoute>
+                    } 
+                    />
+                    
                     <Route path="/my-orders" element={
                           <ProtectedRoute>
                               <MyOrders />

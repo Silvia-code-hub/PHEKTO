@@ -30,6 +30,7 @@ const MyOrders: React.FC = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [expandedOrder, setExpandedOrder] = useState<number | null>(null);
+    const [cancellingId, setCancellingId] = useState<number | null>(null);
 
     useEffect(() => {
         const fetchOrders = async () => {
@@ -72,7 +73,33 @@ const MyOrders: React.FC = () => {
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-pink-500"></div>
             </div>
         );
-    }
+    };
+
+     const handleCancelOrder = async (orderId: number) => {
+        if (!user) return;
+
+        if (!window.confirm('Are you sure you want to cancel this order?')) return;
+
+        setCancellingId(orderId);
+        try {
+            await api.put(`/orders/${orderId}/cancel`, {
+                userId: user.user_id
+            });
+
+            
+            setOrders(orders.map(o =>
+                o.order_id === orderId ? { ...o, status: 'cancelled' } : o
+            ));
+
+            alert(' Order cancelled successfully!');
+        } catch (err: any) {
+            console.error('Cancel error:', err);
+            alert(err.response?.data?.message || 'Failed to cancel order');
+        } finally {
+            setCancellingId(null);
+        }
+    };
+
 
     if (error) {
         return (
@@ -139,6 +166,25 @@ const MyOrders: React.FC = () => {
                                         >
                                             {expandedOrder === order.order_id ? 'Hide ▲' : 'Show ▼'}
                                         </button>
+
+                                         {order.status === 'pending' && (
+                                            <button
+                                                onClick={() => handleCancelOrder(order.order_id)}
+                                                disabled={cancellingId === order.order_id}
+                                                className="text-red-500 hover:text-red-700 text-sm font-medium flex items-center gap-1 disabled:opacity-50"
+                                            >
+                                                {cancellingId === order.order_id ? (
+                                                    'Cancelling...'
+                                                ) : (
+                                                    <>
+                                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                                        </svg>
+                                                        Cancel Order
+                                                    </>
+                                                )}
+                                            </button>
+                                        )}
                                     </div>
                                 </div>
                             </div>
