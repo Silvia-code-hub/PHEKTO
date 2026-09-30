@@ -18,6 +18,7 @@ const featureRoutes = require('./src/routes/featureRoutes');
 const authRoutes = require('./src/routes/authRoutes');
 const adminRoutes = require('./src/routes/adminRoutes');
 const vendorRoutes = require('./src/routes/vendorRoutes');
+const wishlistRoutes = require('./src/routes/wishlistRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -238,6 +239,7 @@ app.use('/api/categories', categoryRoutes);
 app.use('/api/features', featureRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/vendor', vendorRoutes);
+app.use('/api/wishlist', wishlistRoutes);
 
 
 console.log('Registered routes:');
@@ -254,6 +256,7 @@ console.log('- /api/features');
 console.log('- /api/auth');
 console.log('- /api/admin');
 console.log('- /api/vendor');
+console.log('-/api/wishlist');
 console.log('- /uploads (static files)');
 
 app.use((req, res) => {
