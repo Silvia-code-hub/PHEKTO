@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { type Product, getImageUrl } from '../Services/productService';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
+import { useWishlist } from '../context/WishlistContext';
 import api from '../Services/api';
 import { FaShoppingCart, FaRegHeart, FaSearchPlus } from 'react-icons/fa';
 
@@ -16,6 +17,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { addToCart } = useCart();
   const [imageLoaded, setImageLoaded] = React.useState(false);
   const [adding, setAdding] = React.useState(false);
+  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
+  const inWishlist = isInWishlist(product.product_id);
 
   const formatPrice = (price: any): string => {
     if (price === null || price === undefined) return '0.00';
@@ -49,10 +52,25 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   };
 
   
-  const handleWishlist = (e: React.MouseEvent) => {
+ const handleWishlist = async (e: React.MouseEvent) => {
     e.stopPropagation();
-    alert('Wishlist feature coming soon!');
-  };
+    
+    if (!user) {
+        alert('Please login to add to wishlist');
+        navigate('/login');
+        return;
+    }
+
+    try {
+        if (inWishlist) {
+            await removeFromWishlist(product.product_id);
+        } else {
+            await addToWishlist(product.product_id);
+        }
+    } catch (err: any) {
+        alert(err.response?.data?.error || 'Failed');
+    }
+};
 
   
   const handleViewDetails = (e: React.MouseEvent) => {
@@ -85,11 +103,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
          
           <button
-            onClick={handleWishlist}
-            className="bg-white rounded-full p-2 shadow-md hover:bg-pink-500 transition-colors duration-300 cursor-pointer"
-            title="Add to Wishlist"
+              onClick={handleWishlist}
+              className={`... ${inWishlist ? 'bg-pink-500' : ''}`}
+              title={inWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
           >
-            <FaRegHeart className="text-pink-500 hover:text-white text-base" />
+              <FaRegHeart className={`text-sm ${inWishlist ? 'text-white' : 'text-pink-500'}`} />
           </button>
 
           

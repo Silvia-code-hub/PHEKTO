@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from './context/CartContext';
+import { WishlistProvider } from './context/WishlistContext';
 import ProtectedRoute from "./Components/ProtectedRoute";
 
 
@@ -11,6 +12,7 @@ import Register from "./Pages/Register";
 import ForgotPassword from './Pages/ForgotPassword';
 import ResetPassword from './Pages/ResetPassword';
 import Profile from "./Pages/Profile";
+import Wishlist from './Pages/Wishlist';
 
 import ProductsPage from "./Pages/ProductsPage";
 import TrendingPage from "./Pages/TrendingPage";
@@ -56,6 +58,7 @@ const AppRouter = () => {
         <Router>
             <AuthProvider>
                 <CartProvider>
+                   <WishlistProvider> 
                 <Routes>
                     <Route path="/verify-email" element={<VerifyEmail />} />
                     <Route path="/login" element={<Login />} />
@@ -70,6 +73,11 @@ const AppRouter = () => {
                         </ProtectedRoute>
                     } 
                     />
+                    <Route path="/wishlist" element={
+                        <ProtectedRoute>
+                            <Wishlist />
+                        </ProtectedRoute>
+                    } />
                     
                     <Route path="/my-orders" element={
                           <ProtectedRoute>
@@ -176,6 +184,7 @@ const AppRouter = () => {
 
                 
             </Routes>
+            </WishlistProvider>
             </CartProvider>
             </AuthProvider>
         </Router>

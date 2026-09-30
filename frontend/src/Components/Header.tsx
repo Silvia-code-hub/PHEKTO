@@ -4,11 +4,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import RoleBasedMenu from './RoleBasedMenu';
+import { useWishlist } from '../context/WishlistContext';
 
 function Header() {
     const { user, logout } = useAuth();
     const { cartCount } = useCart();
     const navigate = useNavigate();
+    const { wishlistCount } = useWishlist();
 
     const handleLogout = () => {
         logout();
@@ -103,10 +105,15 @@ function Header() {
                     
                     <Link 
                         to="/wishlist" 
-                        className='flex items-center gap-1 font-semibold text-xs sm:text-sm hover:text-pink-200 transition-colors'
+                        className='flex items-center gap-1 font-semibold text-xs sm:text-sm hover:text-pink-200 transition-colors relative'
                     >
                         <span className='hidden sm:inline'>Wishlist</span>
                         <FaRegHeart className='text-sm sm:text-base' />
+                        {wishlistCount > 0 && (
+                            <span className='absolute -top-2 -right-2 bg-pink-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold'>
+                                {wishlistCount}
+                            </span>
+                        )}
                     </Link>
                     
                     

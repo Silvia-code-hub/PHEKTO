@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { type Product, getImageUrl } from "../Services/productService";
 import { FaShoppingCart, FaRegHeart, FaSearchPlus } from 'react-icons/fa';
+import { useWishlist } from '../context/WishlistContext';
 
 interface LeatestCardProps {
     product: Product;
@@ -8,6 +9,10 @@ interface LeatestCardProps {
 
 const LeastCard: React.FC<LeatestCardProps> = ({ product }) => {
      const [imageLoaded, setImageLoaded] = useState(false);
+     const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
+     const inWishlist = isInWishlist(product.product_id);
+
+
     const formatPrice = (price: any): string => {
         if (price === null || price === undefined) return '0.00';
         const numPrice = typeof price === 'string' ? parseFloat(price) : price;
@@ -15,6 +20,22 @@ const LeastCard: React.FC<LeatestCardProps> = ({ product }) => {
     };
     
     const imageUrl = getImageUrl(product.image_url, 150, 150);
+
+    const handleWishlist = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    
+   
+
+    try {
+        if (inWishlist) {
+            await removeFromWishlist(product.product_id);
+        } else {
+            await addToWishlist(product.product_id);
+        }
+    } catch (err: any) {
+        alert(err.response?.data?.error || 'Failed');
+    }
+};
 
     return (
         
@@ -45,7 +66,15 @@ const LeastCard: React.FC<LeatestCardProps> = ({ product }) => {
                         <FaShoppingCart className="text-purple-500 hover:text-white text-xs" />
                     </div>
                     <div className="bg-white rounded-full p-1 shadow-md hover:bg-pink-500 cursor-pointer">
-                        <FaRegHeart className="text-pink-500 hover:text-white text-xs" />
+                        <button
+                          onClick={handleWishlist}
+                          className={`... ${inWishlist ? 'bg-pink-500' : ''}`}
+                          title={inWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
+                      >
+                          <FaRegHeart className={`text-sm ${inWishlist ? 'text-white' : 'text-pink-500'}`} />
+                      </button>
+
+                        
                     </div>
                     <div className="bg-white rounded-full p-1 shadow-md hover:bg-blue-500 cursor-pointer">
                         <FaSearchPlus className="text-blue-500 hover:text-white text-xs" />

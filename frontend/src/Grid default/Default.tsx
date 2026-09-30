@@ -6,6 +6,7 @@ import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
 import { FaShoppingCart, FaRegHeart, FaSearchPlus, FaTh, FaThList } from 'react-icons/fa';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { useWishlist } from '../context/WishlistContext';
 
 interface Product {
     product_id: number;
@@ -20,6 +21,7 @@ const Default: React.FC = () => {
     const navigate = useNavigate();
     const { user } = useAuth();
     const { addToCart } = useCart();
+    const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
 
     const [products, setProducts] = useState<Product[]>([]);
     const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
@@ -76,7 +78,7 @@ const Default: React.FC = () => {
         return isNaN(numPrice) ? '0.00' : numPrice.toFixed(2);
     };
 
-   
+    
     const handleAddToCart = async (e: React.MouseEvent, productId: number) => {
         e.stopPropagation();
         if (!user) {
@@ -100,9 +102,25 @@ const Default: React.FC = () => {
         navigate(`/product-details/${productId}`);
     };
 
-    const handleWishlist = (e: React.MouseEvent) => {
+   
+    const handleWishlist = async (e: React.MouseEvent, productId: number) => {
         e.stopPropagation();
-        alert('Wishlist feature coming soon!');
+
+        if (!user) {
+            alert('Please login to add to wishlist');
+            navigate('/login');
+            return;
+        }
+
+        try {
+            if (isInWishlist(productId)) {
+                await removeFromWishlist(productId);
+            } else {
+                await addToWishlist(productId);
+            }
+        } catch (err: any) {
+            alert(err.response?.data?.error || 'Failed');
+        }
     };
 
     if (loading) {
@@ -138,7 +156,7 @@ const Default: React.FC = () => {
                     </div>
                 </div>
 
-
+                
                 <div className="header-section flex justify-between items-center mb-8 flex-wrap gap-4 w-full">
                     <div>
                         <h2 className="text-xl font-semibold text-blue-shade">
@@ -204,6 +222,8 @@ const Default: React.FC = () => {
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5 lg:gap-6">
                             {visibleProducts.map((product) => {
                                 const imageUrl = getImageUrl(product.image_url);
+                                
+                                const inWishlist = isInWishlist(product.product_id);
 
                                 return (
                                     <div key={product.product_id} className="product-card group bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
@@ -218,7 +238,7 @@ const Default: React.FC = () => {
                                                 }}
                                             />
 
-                                           
+                                            
                                             <div className="absolute top-2 right-2 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
                                                 <button
                                                     onClick={(e) => handleAddToCart(e, product.product_id)}
@@ -229,11 +249,15 @@ const Default: React.FC = () => {
                                                     <FaShoppingCart className="text-purple-500 hover:text-white text-sm" />
                                                 </button>
                                                 <button
-                                                    onClick={handleWishlist}
-                                                    className="bg-white rounded-full p-2 shadow-md hover:bg-pink-500 transition-colors cursor-pointer"
-                                                    title="Add to Wishlist"
+                                                    onClick={(e) => handleWishlist(e, product.product_id)}
+                                                    className={`rounded-full p-2 shadow-md transition-colors cursor-pointer ${
+                                                        inWishlist ? 'bg-pink-500' : 'bg-white hover:bg-pink-500'
+                                                    }`}
+                                                    title={inWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
                                                 >
-                                                    <FaRegHeart className="text-pink-500 hover:text-white text-sm" />
+                                                    <FaRegHeart className={`text-sm ${
+                                                        inWishlist ? 'text-white' : 'text-pink-500 hover:text-white'
+                                                    }`} />
                                                 </button>
                                                 <button
                                                     onClick={(e) => handleViewDetails(e, product.product_id)}
@@ -277,11 +301,13 @@ const Default: React.FC = () => {
                         </div>
                     )}
 
-                   
+                    
                     {viewMode === 'list' && (
                         <div className="flex flex-col gap-4 w-full">
                             {visibleProducts.map((product) => {
                                 const imageUrl = getImageUrl(product.image_url);
+                                
+                                const inWishlist = isInWishlist(product.product_id);
 
                                 return (
                                     <div key={product.product_id} className="product-card-list group bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300 flex p-4 gap-4 w-full">
@@ -328,7 +354,6 @@ const Default: React.FC = () => {
                                                     )}
                                                 </div>
 
-                                                {/* ✅ CLICKABLE ICONS — List View */}
                                                 <div className="flex gap-2">
                                                     <button
                                                         onClick={(e) => handleAddToCart(e, product.product_id)}
@@ -339,11 +364,15 @@ const Default: React.FC = () => {
                                                         <FaShoppingCart className="text-purple-500 hover:text-white text-sm" />
                                                     </button>
                                                     <button
-                                                        onClick={handleWishlist}
-                                                        className="bg-white rounded-full p-2 shadow-md hover:bg-pink-500 transition-colors cursor-pointer"
-                                                        title="Add to Wishlist"
+                                                        onClick={(e) => handleWishlist(e, product.product_id)}
+                                                        className={`rounded-full p-2 shadow-md transition-colors cursor-pointer ${
+                                                            inWishlist ? 'bg-pink-500' : 'bg-white hover:bg-pink-500'
+                                                        }`}
+                                                        title={inWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
                                                     >
-                                                        <FaRegHeart className="text-pink-500 hover:text-white text-sm" />
+                                                        <FaRegHeart className={`text-sm ${
+                                                            inWishlist ? 'text-white' : 'text-pink-500 hover:text-white'
+                                                        }`} />
                                                     </button>
                                                     <button
                                                         onClick={(e) => handleViewDetails(e, product.product_id)}
@@ -361,7 +390,7 @@ const Default: React.FC = () => {
                         </div>
                     )}
 
-                  
+                    
                     {totalPages > 1 && (
                         <div className="pagination flex justify-center gap-2 mt-8">
                             <button
@@ -405,7 +434,7 @@ const Default: React.FC = () => {
                     )}
                 </div>
 
-               
+
                 <div className="advertisement mt-12 w-full">
                     <img
                         src={getImageUrl('/uploads/products/image_015.png')}
