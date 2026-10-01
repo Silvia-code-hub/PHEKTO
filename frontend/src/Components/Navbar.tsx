@@ -20,20 +20,8 @@ const Navigation = () => {
   };
 
   const menuItems = [
-    { id: 1, label: 'Grid Default', path: '/grid' },
-    { id: 2, label: 'Shop List', path: '/shop-list' },
-    { id: 3, label: 'Shop Left Sidebar', path: '/side-bar' },
-    { id: 4, label: 'Product Details', path: '/product-details' },
-    { id: 5, label: 'Shopping Cart', path: '/shopping-cart' },
-    { id: 6, label: 'Order Completed', path: '/order-complete' },
-    { id: 7, label: 'Hekto Demo', path: '/hekto-demo' },
-    { id: 8, label: 'My Account', path: '/my-account' },
-    { id: 9, label: 'Blog Page', path: '/blog' },
-    { id: 10, label: 'Single Blog', path: '/single-blog' },
-    { id: 11, label: 'About Us', path: '/about-us' },
-    { id: 12, label: 'Contact Us', path: '/contact-us' },
-    { id: 13, label: '404 Not Found', path: '/not-found' },
-    { id: 14, label: 'FAQ', path: '/faq' },
+    { id: 1, label: 'About Us', path: '/about-us' },
+    { id: 2, label: 'FAQ', path: '/faq' },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -76,7 +64,7 @@ const Navigation = () => {
                 onChange={(e) => navigate(e.target.value)}
                 className='absolute appearance-none inset-0 w-full h-full opacity-0 cursor-pointer z-10'
               >
-                <option value="/" className="text-black appearance-none">Home </option>
+                
                 {menuItems.map((item) => (
                   <option key={item.id} value={item.path} className="text-black appearance-none">
                     {item.label}
@@ -118,25 +106,125 @@ const Navigation = () => {
             </Link>
 
            
-            <Link
-              to="/blog"
-              className={`font-normal text-base px-3 py-2 rounded-md transition-colors duration-200 ${
-                isActive('/blog') ? 'text-custom-pink' : 'text-gray-700 hover:text-custom-pink'
-              }`}
-            >
-              Blog
-            </Link>
-
-            
-            <Link
-              to="/shop-list"
-              className={`font-normal text-base px-3 py-2 rounded-md transition-colors duration-200 ${
-                isActive('/shop-list') ? 'text-custom-pink' : 'text-gray-700 hover:text-custom-pink'
-              }`}
-            >
-              Shop
-            </Link>
-
+    
+             <div className="relative group">
+                 <button
+                     className={`font-normal text-base px-3 py-2 rounded-md transition-colors duration-200 flex items-center gap-1 ${
+                         isActive('/shop-list') || isActive('/grid') || isActive('/shopping-cart')
+                             ? 'text-custom-pink'
+                             : 'text-gray-700 hover:text-custom-pink'
+                     }`}
+                 >
+                     Shop
+                     <svg
+                         className="w-3 h-3 transition-transform duration-200 group-hover:rotate-180"
+                         fill="none"
+                         stroke="currentColor"
+                         viewBox="0 0 24 24"
+                     >
+                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                     </svg>
+                 </button>
+             
+                 <div className="absolute top-full left-0 mt-1 w-52 bg-white rounded-md shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border border-gray-100">
+                     <Link
+                         to="/grid"
+                         className={`block px-4 py-2 text-sm transition-colors duration-200 ${
+                             isActive('/grid')
+                                 ? 'text-custom-pink bg-pink-50'
+                                 : 'text-gray-700 hover:text-custom-pink hover:bg-pink-50'
+                         }`}
+                     >
+                         Shop Grid Default
+                     </Link>
+                     <Link
+                         to="/shop-list"
+                         className={`block px-4 py-2 text-sm transition-colors duration-200 ${
+                             isActive('/shop-list')
+                                 ? 'text-custom-pink bg-pink-50'
+                                 : 'text-gray-700 hover:text-custom-pink hover:bg-pink-50'
+                         }`}
+                     >
+                         Shop List
+                     </Link>
+                     <Link
+                         to="/side-bar"
+                         className={`block px-4 py-2 text-sm transition-colors duration-200 ${
+                             isActive('/side-bar')
+                                 ? 'text-custom-pink bg-pink-50'
+                                 : 'text-gray-700 hover:text-custom-pink hover:bg-pink-50'
+                         }`}
+                     >
+                         Side Bar
+                     </Link>
+                     <Link
+                         to="/shopping-cart"
+                         className={`block px-4 py-2 text-sm transition-colors duration-200 ${
+                             isActive('/shopping-cart')
+                                 ? 'text-custom-pink bg-pink-50'
+                                 : 'text-gray-700 hover:text-custom-pink hover:bg-pink-50'
+                         }`}
+                     >
+                         Shopping Cart
+                     </Link>
+                 </div>
+             </div>
+             
+             
+             <div className="relative group">
+                 <button
+                     className={`font-normal text-base px-3 py-2 rounded-md transition-colors duration-200 flex items-center gap-1 ${
+                         isActive('/blog') || isActive('/single-blog') || isActive('/hekto-demo')
+                             ? 'text-custom-pink'
+                             : 'text-gray-700 hover:text-custom-pink'
+                     }`}
+                 >
+                     Blog
+                     <svg
+                         className="w-3 h-3 transition-transform duration-200 group-hover:rotate-180"
+                         fill="none"
+                         stroke="currentColor"
+                         viewBox="0 0 24 24"
+                     >
+                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                     </svg>
+                 </button>
+             
+                 
+                 <div className="absolute top-full left-0 mt-1 w-52 bg-white rounded-md shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border border-gray-100">
+                     <Link
+                         to="/blog"
+                         className={`block px-4 py-2 text-sm transition-colors duration-200 ${
+                             isActive('/blog')
+                                 ? 'text-custom-pink bg-pink-50'
+                                 : 'text-gray-700 hover:text-custom-pink hover:bg-pink-50'
+                         }`}
+                     >
+                         All Posts
+                     </Link>
+                     <Link
+                         to="/single-blog"
+                         className={`block px-4 py-2 text-sm transition-colors duration-200 ${
+                             isActive('/single-blog')
+                                 ? 'text-custom-pink bg-pink-50'
+                                 : 'text-gray-700 hover:text-custom-pink hover:bg-pink-50'
+                         }`}
+                     >
+                         Single Blog Post
+                     </Link>
+                     <Link
+                         to="/hekto-demo"
+                         className={`block px-4 py-2 text-sm transition-colors duration-200 ${
+                             isActive('/hekto-demo')
+                                 ? 'text-custom-pink bg-pink-50'
+                                 : 'text-gray-700 hover:text-custom-pink hover:bg-pink-50'
+                         }`}
+                     >
+                         Hekto Demo
+                     </Link>
+                 </div>
+             </div>
+             
             
             <Link
               to="/contact-us"

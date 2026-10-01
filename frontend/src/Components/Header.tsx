@@ -23,8 +23,15 @@ function Header() {
            
             <div className="hidden sm:flex items-center gap-4 lg:gap-6">
                 <div className='flex items-center font-bold text-xs lg:text-sm gap-2'>
+                    <Link
+                    to="/my-account"
+                    className='flex items-center font-bold text-xs lg:text-sm gap-2 hover:text-pink-200 transition-colors cursor-pointer'
+                    title="My Account"
+                >
                     <FaEnvelope className='text-white mt-1 text-sm' />
-                    <span> {user ? user.email : 'mhhasanul@gmail.com'}</span>
+                    <span>{user ? user.email : 'mhhasanul@gmail.com'}</span>
+                </Link>
+                    
                 </div>
                 <div className='flex items-center font-bold text-xs lg:text-sm gap-2'>
                     <FaPhoneAlt className='text-white text-sm' />
