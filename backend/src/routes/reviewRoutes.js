@@ -5,7 +5,7 @@ const { authenticateToken } = require('../middlewares/auth');
 
 router.get('/product/:productId', reviewController.getProductReviews);
 router.post('/', authenticateToken, reviewController.addReview);
-router.put('/:reviewId', authenticateToken, reviewController.updateReview);
+
 router.delete('/:reviewId', authenticateToken, reviewController.deleteReview);
 
 module.exports = router;
